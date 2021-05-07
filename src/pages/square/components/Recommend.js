@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, Text, ScrollView, Dimensions } from 'react-native';
+import { Avatar } from 'react-native-elements'
 import AutoResponsive from 'autoresponsive-react-native';
 import Swiper from 'react-native-swiper';
 import Svg from 'react-native-svg-uri';
@@ -8,6 +9,7 @@ import {
   canlenda,
   book,
   cost,
+  like
 } from '../../../res/iconSvg';
 import { get } from '../../../utils/request';
 
@@ -97,7 +99,7 @@ class Recommend extends Component {
       return {
         ...prev,
         page: prev.page+1,
-        data: prev.data.push(res.data),
+        data: res.data,
       }
     })
   }
@@ -106,24 +108,83 @@ class Recommend extends Component {
       itemMargin: 8,
     };
   }
-  getChildrenStyle = () => {
-    return {
-      width: this.state.itemWidth,
-      height: parseInt(Math.random() * 20 + 12) * 10,
-      backgroundColor: 'rgb(92, 67, 155)',
-      borderRadius: 8,
-    };
-  }
   renderChildren = () => {
-    return this.state.array.map(item => {
+    console.log(this.state.data);
+    return this.state.data.map(item => {
       return (
-        <View style={this.getChildrenStyle()} key={item.id}>
-          <Text style={styles.text}>{item.id}</Text>
+        <View 
+          style={{
+            width: this.state.itemWidth,
+            backgroundColor: '#fff',
+            borderRadius: 8,
+            height: this.state.itemWidth*item.width/item.height+100,
+          }} 
+          key={item.id}
+        >
+          {/* image */}
+          <Image
+            source={{uri: item.url}}
+            style={{
+              width: this.state.itemWidth,
+              height: this.state.itemWidth*item.width/item.height,
+              borderRadius: 8,
+            }}
+          ></Image>
+          {/* desc */}
+          <Text 
+            style={{
+              paddingTop: 10,
+              paddingBottom: 10,
+              paddingLeft: 5,
+              paddingRight: 5,
+
+            }}
+          >这是一个关于猫猫miao的手账</Text>
+          {/* user likes */}
+          <View
+            style={{
+              paddingLeft: 5,
+              paddingRight: 5,
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
+            <View 
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center'
+              }}
+            >
+              <Avatar 
+                size="small"
+                rounded
+                source={{uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg'}}
+              />
+              <Text
+                style={{
+                  paddingLeft: 3
+                }}
+              >AnbolKing</Text>
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center'
+              }}
+            >
+              <Svg 
+                width='22' height='22' 
+                svgXmlData={like}
+              />
+              <Text style={{paddingLeft: 2}}>10</Text>
+            </View>
+          </View>
         </View>
-      );
-    }, this);
+      )
+    }, this)
   }
-  async componentDidMount() {
+  componentDidMount() {
     this.handleInit();
   }
   render() {
