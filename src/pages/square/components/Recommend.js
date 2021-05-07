@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, Text, ScrollView, Dimensions } from 'react-native';
+import { View, StyleSheet, Image, Text, ScrollView, Dimensions, RefreshControl } from 'react-native';
 import { Avatar } from 'react-native-elements'
 import AutoResponsive from 'autoresponsive-react-native';
 import Swiper from 'react-native-swiper';
@@ -12,6 +12,7 @@ import {
   like
 } from '../../../res/iconSvg';
 import { get } from '../../../utils/request';
+import { or } from 'react-native-reanimated';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -63,10 +64,7 @@ class Recommend extends Component {
     ],
     page: 1,
     data: [],
-    hasMore: true,
-    refreshLoad: false,
-    moreLoad: false,
-    array: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    isRefreshing: false,
   }
   handleRenderGrid = () => {
     return this.state.grid.map((item, index) => {
@@ -94,7 +92,6 @@ class Recommend extends Component {
         page,
       }
     });
-    console.log(res);
     this.setState(prev => {
       return {
         ...prev,
@@ -109,7 +106,6 @@ class Recommend extends Component {
     };
   }
   renderChildren = () => {
-    console.log(this.state.data);
     return this.state.data.map(item => {
       return (
         <View 
@@ -159,7 +155,7 @@ class Recommend extends Component {
               <Avatar 
                 size="small"
                 rounded
-                source={{uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg'}}
+                source={{uri:'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'}}
               />
               <Text
                 style={{
@@ -184,13 +180,76 @@ class Recommend extends Component {
       )
     }, this)
   }
+  handleRefresh = async () => {
+    this.setState({
+      isRefreshing: true,
+    })
+    let res = await get('https://api.thecatapi.com/v1/images/search', {
+      params: {
+        size: 'full',
+        limit: 10,
+        page: this.state.page,
+      }
+    });
+    this.setState({
+      isRefreshing: false,
+      data: res.data
+    })
+  }
+  handleRefreshControl = () => {
+    return (
+      <RefreshControl 
+        refreshing={ this.state.isRefreshing }
+        onRefresh = {() => this.handleRefresh()}
+        title='loading'
+      />
+    )
+  }
+  handleScroll = async (event) => {
+    let {x, y} = event.nativeEvent.contentOffset
+    console.log(x, y);
+    if(y > 600) {
+      let res = await get('https://api.thecatapi.com/v1/images/search', {
+        params: {
+          size: 'full',
+          limit: 10,
+          page: this.state.page,
+        }
+      });
+      let originData = this.state.data;
+      let prevPage = this.state.page;
+      originData = originData.concat(res.data);
+      this.setState({
+        data: originData,
+        page: prevPage+1,
+      })
+    }
+  }
+  // throttle func
+  throttle = (fn, delay) => {
+    console.log('scroll');
+    var prev = Date.now();
+    return (...rest) => {
+      let context = this;
+      let args = rest;
+      let now = Date.now();
+      if(now-prev >= delay) {
+        fn.apply(context, args);
+        prev = Date.now();
+      }
+    }
+  }
   componentDidMount() {
     this.handleInit();
   }
   render() {
     return (
       <>
-        <ScrollView>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          refreshControl={this.handleRefreshControl()}
+          onScroll={this.throttle(this.handleScroll, 100)}
+        >
           <View style={{flex: 1}}>
             {/* banner图 */}
             <View style={styles.wrapper}>
