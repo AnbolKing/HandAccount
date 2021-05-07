@@ -3,6 +3,8 @@ import { View, TouchableOpacity, Text, StatusBar } from 'react-native';
 import Svg from 'react-native-svg-uri';
 import {
   Add,
+  Calendar,
+  Info
 } from '../res/iconSvg';
 
 
@@ -13,13 +15,13 @@ const CustormerBar = (props) => {
       style={{
         height: 50,
         alignItems: 'center',
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
         backgroundColor: '#fff',
         flexDirection: 'row',
       }}
     >
       <StatusBar backgroundColor={'#fff'} barStyle={'dark-content'} />
-      <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+      <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', flex: 2}}>
       {
         tabs.map((item, index) => {
           return (
@@ -63,7 +65,19 @@ const CustormerBar = (props) => {
         })
       }
       </View>
-      <Svg width='25' height='25' svgXmlData={Add}/>
+      <View 
+        style={{
+          paddingRight: 20,
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flex: 1
+        }}
+      >
+        <Svg width='22' height='22' svgXmlData={Add} />
+        <Svg width='20' height='20' svgXmlData={Calendar} />
+        <Svg width='20' height='20' svgXmlData={Info} />
+      </View>
     </View>
   )
 }
