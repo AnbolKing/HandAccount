@@ -12,7 +12,6 @@ import {
   like
 } from '../../../res/iconSvg';
 import { get } from '../../../utils/request';
-import { or } from 'react-native-reanimated';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -207,7 +206,6 @@ class Recommend extends Component {
   }
   handleScroll = async (event) => {
     let {x, y} = event.nativeEvent.contentOffset
-    console.log(x, y);
     if(y > 600) {
       let res = await get('https://api.thecatapi.com/v1/images/search', {
         params: {
@@ -227,7 +225,6 @@ class Recommend extends Component {
   }
   // throttle func
   throttle = (fn, delay) => {
-    console.log('scroll');
     var prev = Date.now();
     return (...rest) => {
       let context = this;

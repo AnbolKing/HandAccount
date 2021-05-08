@@ -9,6 +9,9 @@ import {
 
 
 const CustormerBar = (props) => {
+  if(props.hasOwnProperty('props')) {
+    props = props.props;
+  }
   const { goToPage, tabs, activeTab } = props;
   return (
     <View
@@ -67,6 +70,7 @@ const CustormerBar = (props) => {
       </View>
       <View 
         style={{
+          display: props.showIcon ? 'flex' : 'none',
           paddingRight: 20,
           flexDirection: 'row',
           justifyContent: 'space-between',
