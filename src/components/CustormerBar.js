@@ -12,6 +12,7 @@ const CustormerBar = (props) => {
   if(props.hasOwnProperty('props')) {
     props = props.props;
   }
+  console.log(props);
   const { goToPage, tabs, activeTab } = props;
   return (
     <View
@@ -50,6 +51,7 @@ const CustormerBar = (props) => {
                     color: activeTab===index ? '#000' : '#B5B5B5',
                     fontSize: 20,
                     fontWeight: 'bold',
+                    ...props.wordStyle,
                   }}
                 >
                   {item}

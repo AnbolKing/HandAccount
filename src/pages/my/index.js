@@ -66,7 +66,18 @@ const MyIndex = () => {
     <View style={styles.container}>
       <ScrollTabView 
         headerHeight={headerHeight} 
-        renderScrollHeader={handleRenderHeader} 
+        renderScrollHeader={handleRenderHeader}
+        // renderTabBar={(props) => {
+        //   props.showIcon = false;
+        //   props.wordStyle = {
+        //     fontSize: 15,
+        //   }
+        //   return (
+        //     <CustormerBar 
+        //       props={props} 
+        //     />
+        //   )
+        // }}
         tabBarUnderlineStyle={{
           backgroundColor:'#E066FF',
           width: 40,
@@ -77,7 +88,9 @@ const MyIndex = () => {
           fontSize: 15,
           fontWeight: '700'
         }}
-        tabBarBackgroundColor='#ffffff'
+        tabBarStyle={{
+          backgroundColor: '#fff',
+        }}
       >
         <TabView tabLabel="我的手账" name='account' />
         <TabView tabLabel="我的收藏" name='collection' />

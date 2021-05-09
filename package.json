@@ -30,6 +30,7 @@
         "react-native-elements": "^3.4.1",
         "react-native-gesture-handler": "^1.10.3",
         "react-native-head-tab-view": "^4.0.0-rc.7",
+        "react-native-linear-gradient": "^2.5.6",
         "react-native-pager-view": "^5.1.7",
         "react-native-reanimated": "^2.0.0",
         "react-native-safe-area-context": "^3.2.0",

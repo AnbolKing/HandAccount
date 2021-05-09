@@ -8,11 +8,15 @@ class HandAccount extends Component {
   render() {
     const { data } = this.state;
     return (
-      data.map((o, i) => (
-        <View style={{ marginVertical: 2, padding: 10, borderWidth: 1, backgroundColor: '#fff' }}>
-            <Text>{'acc => ' + i}</Text>
-        </View>
-      ))
+      <View style={{backgroundColor: '#fff'}}>
+        {
+          data.map((o, i) => (
+            <View style={{ marginVertical: 2, padding: 10, borderWidth: 1}}>
+                <Text>{'acc => ' + i}</Text>
+            </View>
+          ))
+        }
+      </View>
     );
   }
 }
