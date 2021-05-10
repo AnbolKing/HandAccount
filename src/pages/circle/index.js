@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import CircleHeader from './components/header';
+import CircleBody from './components/body';
 
 class CircleIndex extends Component {
   render() {
     return (
       <View>
-        <Text>circle</Text>
+        <CircleHeader />
+        <CircleBody />
       </View>
     )
   }
 }
 
-export default CircleIndex
+export default CircleIndex;
