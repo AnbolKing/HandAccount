@@ -11,7 +11,6 @@ const CircleItem = () => {
     itemContainer: {
       backgroundColor: '#fff',
       marginBottom: 10,
-      marginTop: 10,
       padding: 12,
     },
     info: {
