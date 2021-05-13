@@ -154,6 +154,12 @@ class CircleBody extends Component {
     }
     return null;
   }
+  componentDidMount() {
+    console.log(123);
+    setTimeout(() => {
+      this._scrollview.scrollTo({ x: 0, y: this.props.refreshViewHeight, animated: true })
+    }, 0)
+  }
   render() {
     return (
       <ScrollView
