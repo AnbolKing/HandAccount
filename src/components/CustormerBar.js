@@ -20,7 +20,7 @@ const CustormerBar = (props) => {
         height: 50,
         alignItems: 'center',
         justifyContent: 'space-between',
-        backgroundColor: '#fff',
+        backgroundColor: activeTab===0 ? '#fff' : '#F7F8FD',
         flexDirection: 'row',
       }}
     >
