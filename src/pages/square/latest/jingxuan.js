@@ -5,6 +5,10 @@ import ShowItem from '../components/ShowItem';
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    height: '100%',
+    flex: 1,
   }
 })
 
