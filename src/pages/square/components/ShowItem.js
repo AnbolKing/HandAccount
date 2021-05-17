@@ -28,8 +28,6 @@ const styles = StyleSheet.create({
     paddingRight: 20,
   },
   image: {
-    width: 110,
-    height: 115,
     borderRadius: 8,
   },
   item: {
@@ -49,33 +47,11 @@ const styles = StyleSheet.create({
   }
 })
 
-const imgData = [
-  {
-    url: 'https://s2.ax1x.com/2019/05/16/E7vLjA.jpg',
-    id: '237268_ftb',
-  },
-  {
-    url: 'https://s2.ax1x.com/2019/05/16/E7vLjA.jpg',
-    id: '24f34ftb',
-  },
-  {
-    url: 'https://s2.ax1x.com/2019/05/16/E7vLjA.jpg',
-    id: '34f3',
-  },
-  {
-    url: 'https://s2.ax1x.com/2019/05/16/E7vLjA.jpg',
-    id: 'q34fq3',
-  },
-  {
-    url: 'https://s2.ax1x.com/2019/05/16/E7vLjA.jpg',
-    id: '134f314t',
-  }
-]
-
-const handleRenderItem = (item) => {
+const handleRenderItem = (item, imgStyle) => {
   return (
     <View style={styles.item}>
-      <Image source={require('../../../res/imgs/exampleItem.png')} style={styles.image}></Image>
+      {/* <Image source={require('../../../res/imgs/exampleItem.png')} style={{...styles.image, ...imgStyle}}></Image> */}
+      <Image source={{uri: item.item.url}} style={{...styles.image, ...imgStyle}}></Image>
       <View style={styles.imgText}>
         <Text style={styles.imgTitle}>萌宠乐园</Text>
         <Text style={styles.imgPrice}>免费</Text>
@@ -84,19 +60,20 @@ const handleRenderItem = (item) => {
   )
 }
 
-const ShowItem = () => {  
+const ShowItem = (props) => {  
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>最新贴纸</Text>
+        <Text style={styles.title}>{props.title}</Text>
         <Text style={styles.arrow}>更多 &gt;</Text>
       </View>
       <View style={styles.images}>
         <FlatList 
-          data={imgData}
+          data={props.data}
           keyExtractor={item => item.id}
           renderItem={item => {
-            return handleRenderItem(item);
+            console.log(item);
+            return handleRenderItem(item, props.imgStyle);
           }}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
