@@ -72,7 +72,6 @@ const ShowItem = (props) => {
           data={props.data}
           keyExtractor={item => item.id}
           renderItem={item => {
-            console.log(item);
             return handleRenderItem(item, props.imgStyle);
           }}
           horizontal={true}
