@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, StyleSheet, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import { NavigationContext } from "@react-navigation/native";
 import { 
   Button,
@@ -319,12 +319,16 @@ class MyHeader extends Component {
                 <Text style={styles.word}>获赞</Text>
               </View>
               <View style={styles.desc}>
-                <Text style={styles.num}>287</Text>
-                <Text style={styles.word}>关注</Text>
+                <TouchableOpacity activeOpacity={0.8} onPress={() => this.context.navigate("MyFocus")}>
+                  <Text style={styles.num}>287</Text>
+                  <Text style={styles.word}>关注</Text>
+                </TouchableOpacity>
               </View>
               <View style={styles.desc}>
-                <Text style={styles.num}>18</Text>
-                <Text style={styles.word}>粉丝</Text>
+                <TouchableOpacity activeOpacity={0.8} onPress={() => this.context.navigate("MyFans")}>
+                  <Text style={styles.num}>18</Text>
+                  <Text style={styles.word}>粉丝</Text>
+                </TouchableOpacity>
               </View>
             </View>
             <View style={styles.bottomRight}>

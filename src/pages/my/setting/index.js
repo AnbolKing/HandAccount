@@ -89,7 +89,6 @@ class MySetting extends Component {
     })
   }
   handleBack = () => {
-    // alert(123);
     this.context.goBack();
   }
   render() {
