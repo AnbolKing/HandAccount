@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, ScrollView, RefreshControl } from 'react-native';
 import Header from '../../components/Header';
 import FlexButton from '../../components/FlexButton';
-import ListItem from '../../components/ListItem';
+import MesItem from '../../components/mesItem';
 import Empty from '../../components/Empty';
 import {
   setting,
@@ -51,7 +51,7 @@ class MessageIndex extends Component {
     if(data) {
       return data.map((item, index) => {
         return (
-          <ListItem 
+          <MesItem 
             key={index}
             data={item}
           />

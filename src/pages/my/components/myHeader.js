@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { NavigationContext } from "@react-navigation/native";
 import { 
   Button,
   ListItem,
@@ -147,6 +148,7 @@ const styles = StyleSheet.create({
 })
 
 class MyHeader extends Component {
+  static contextType=NavigationContext;
   state = {
     isVisible: false,
     bottomList: [
@@ -235,6 +237,7 @@ class MyHeader extends Component {
                 buttonStyle={{
                   ...styles.buttonStyle
                 }}
+                onPress={() => this.context.navigate("MySetting")}
               />
               <Button
                 icon={

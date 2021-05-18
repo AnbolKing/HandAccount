@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 const styles = StyleSheet.create({
   headerContainer: {
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   headerText: {
-    fontSize: 20,
+    fontSize: 18,
     textAlign: 'center',
     color: '#000',
     
@@ -32,9 +32,14 @@ const styles = StyleSheet.create({
 const Header = (props) => {
   return (
     <View style={{...styles.headerContainer, ...props.containerStyle}}>
-      <View style={styles.cellfixed}>
-        {props.left===null ? '' : props.left}
-      </View>
+      <TouchableOpacity 
+        activeOpacity={0.8} 
+        onPress={() => props.leftEvent ? props.leftEvent() : null}
+      >
+        <View style={styles.cellfixed}>
+          {props.left===null ? '' : props.left}
+        </View>
+      </TouchableOpacity>
       <View style={styles.cell}>
         <Text style={styles.headerText}>
           {props.title}

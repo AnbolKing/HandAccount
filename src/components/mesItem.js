@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   }
 })
 
-const ListItem = (props) => {
+const MesItem = (props) => {
   const { data } = props;
   return (
     <View style={styles.container}>
@@ -65,4 +65,4 @@ const ListItem = (props) => {
   )
 }
 
-export default ListItem;
+export default MesItem;
