@@ -1,22 +1,47 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import { ScrollView } from 'react-native-scroll-head-tab-view';
+import Masonry from '../../../components/masonry';
+import { get } from '../../../utils/request';
 
 class Like extends Component {
   state = {
-    data: new Array(20).fill({}),
+    page: 1,
+    data: [],
+  }
+  handleInit = async () => {
+    const { page } = this.state;
+    let res = await get('https://api.thecatapi.com/v1/images/search', {
+      params: {
+        size: 'full',
+        limit: 10,
+        page,
+      }
+    });
+    this.setState(prev => {
+      return {
+        ...prev,
+        page: prev.page+1,
+        data: res.data,
+      }
+    })
+  }
+
+  componentDidMount() {
+    this.handleInit();
   }
   render() {
     const { data } = this.state;
     return (
-      <View style={{backgroundColor: '#fff'}}>
-        {
-          data.map((o, i) => (
-            <View style={{ marginVertical: 2, padding: 10, borderWidth: 1}}>
-                <Text>{'acc => ' + i}</Text>
-            </View>
-          ))
-        }
-      </View>
+      <ScrollView 
+        {...this.props.props}
+      >
+        <View style={{backgroundColor: '#fff', flex: 1}}>
+          <Masonry 
+            data={data}
+          />
+        </View>
+      </ScrollView>
     );
   }
 }

@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   avatarContainer: {
-    paddingTop: 15,
+    paddingTop: 10,
     paddingBottom: 10,
     paddingRight: 12,
   },
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
-    paddingTop: 17,
+    paddingTop: 10,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: '#EAEAEA'
   }, 

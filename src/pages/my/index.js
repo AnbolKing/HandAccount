@@ -21,23 +21,17 @@ const MyIndex = () => {
   const TabView = (props) => {
     if(props.name === 'account') {
       return (
-        <ScrollView {...props}>
-          <HandAccount />
-        </ScrollView>
+        <HandAccount props={props}/>
       );
     }
     if(props.name === 'collection') {
       return (
-        <ScrollView {...props}>
-          <Collection />
-        </ScrollView>
+        <Collection props={props}/>
       );
     }
     if(props.name === 'like') {
       return (
-        <ScrollView {...props}>
-          <Like />
-        </ScrollView>
+        <Like props={props}/>
       );
     }
   }  
@@ -92,9 +86,9 @@ const MyIndex = () => {
           backgroundColor: '#fff',
         }}
       >
-        <TabView tabLabel="我的手账" name='account' />
-        <TabView tabLabel="我的收藏" name='collection' />
-        <TabView tabLabel="我的喜欢" name='like' />
+        <TabView style={{flex: 1}} tabLabel="我的手账" name='account' />
+        <TabView style={{flex: 1}} tabLabel="我的收藏" name='collection' />
+        <TabView style={{flex: 1}} tabLabel="我的喜欢" name='like' />
       </ScrollTabView>
     </View>
     </>
