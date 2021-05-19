@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import { NavigationContext } from "@react-navigation/native";
-import { 
-  Button,
-  ListItem,
-} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Svg from 'react-native-svg-uri';
 import {
   Avatar,
-  BottomSheet
+  BottomSheet,
+  Button,
+  ListItem,
+  Overlay,
 } from 'react-native-elements';
 import {
   jinbi,
@@ -17,6 +16,7 @@ import {
   huiyuan,
 } from '../../../res/iconSvg';
 import LineButton from '../../../components/LineButton';
+import Modal from './modal';
 
 const styles = StyleSheet.create({
   container: {
@@ -150,6 +150,7 @@ const styles = StyleSheet.create({
 class MyHeader extends Component {
   static contextType=NavigationContext;
   state = {
+    isOverlay: false,
     isVisible: false,
     bottomList: [
       {
@@ -194,8 +195,18 @@ class MyHeader extends Component {
       isVisible: false,
     })
   }
+  handleShow = () => {
+    this.setState({
+      isOverlay: true,
+    })
+  }
+  handleColseOverlay = () => {
+    this.setState({
+      isOverlay: false,
+    })
+  }
   render() {
-    const { isVisible, bottomList } = this.state; 
+    const { isVisible, bottomList, isOverlay } = this.state; 
     return (
       <>
         <View style={styles.container}>
@@ -315,8 +326,10 @@ class MyHeader extends Component {
           <View style={styles.bottom}>
             <View style={styles.bottomLeft}>
               <View style={styles.desc}>
-                <Text style={styles.num}>118</Text>
-                <Text style={styles.word}>获赞</Text>
+                <TouchableOpacity activeOpacity={0.8} onPress={this.handleShow}>
+                  <Text style={styles.num}>118</Text>
+                  <Text style={styles.word}>获赞</Text>
+                </TouchableOpacity>
               </View>
               <View style={styles.desc}>
                 <TouchableOpacity activeOpacity={0.8} onPress={() => this.context.navigate("MyFocus")}>
@@ -384,6 +397,20 @@ class MyHeader extends Component {
             }
           </BottomSheet>
         </TouchableWithoutFeedback>
+        <Overlay 
+          isVisible={isOverlay} 
+          onBackdropPress={this.handleColseOverlay}
+          overlayStyle={{
+            width: '80%',
+            borderRadius: 12,
+            paddingLeft: 0,
+            paddingRight: 0,
+          }}
+        >
+          <Modal 
+            close={this.handleColseOverlay}
+          />
+        </Overlay>
       </>
     )
   }
