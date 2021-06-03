@@ -10,6 +10,7 @@ import {
   ListItem,
   Overlay,
 } from 'react-native-elements';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import {
   jinbi,
   jifen,
@@ -152,11 +153,15 @@ class MyHeader extends Component {
   state = {
     isOverlay: false,
     isVisible: false,
+    avatarUrl: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
     bottomList: [
       {
         title: '从手机图库中选择',
-        onPress: () => {
-          alert('手机图库');
+        onPress: async () => {
+          this.handleFromLib()
+          this.setState({
+            isVisible: false,
+          })
         },
         id: '376rci_uiwec',
         containerStyle: {
@@ -167,7 +172,10 @@ class MyHeader extends Component {
       {
         title: '使用相机拍摄',
         onPress: () => {
-          alert('调用摄像头');
+          this.handleFromCarema();
+          this.setState({
+            isVisible: false,
+          })
         },
         id: '6278ejf_inv'
       },
@@ -190,6 +198,37 @@ class MyHeader extends Component {
       isVisible: true,
     })
   }
+  handleFromCarema = () => {
+    launchCamera(
+      {
+        cameraType: 'front',
+      },
+      (response) => {
+        if(response.didCancel) {
+          return ;
+        }
+        let avatarUrl = response.assets[0].uri;
+        this.setState({avatarUrl: avatarUrl});
+      },
+    )
+  }
+  handleFromLib = () => {
+    launchImageLibrary(
+      {
+        mediaType: 'photo',
+        includeBase64: false,
+        maxHeight: 200,
+        maxWidth: 200,
+      },
+      (response) => {
+        if(response.didCancel) {
+          return ;
+        }
+        let avatarUrl = response.assets[0].uri;
+        this.setState({avatarUrl: avatarUrl});
+      },
+    )
+  }
   handleClose = () => {
     this.setState({
       isVisible: false,
@@ -205,8 +244,13 @@ class MyHeader extends Component {
       isOverlay: false,
     })
   }
+  componentDidMount = () => {
+    // if(this.context.state.params) {
+    //   console.log(this.context.state.params);
+    // }
+  }
   render() {
-    const { isVisible, bottomList, isOverlay } = this.state; 
+    const { isVisible, bottomList, isOverlay, avatarUrl } = this.state; 
     return (
       <>
         <View style={styles.container}>
@@ -215,7 +259,7 @@ class MyHeader extends Component {
               onPress={this.handleChangeAnatar}
               size='large'
               rounded
-              source={{uri:'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'}}
+              source={{uri: avatarUrl}}
             />
             <View style={styles.lib}>
               <Text style={styles.word}>站内号：272344341</Text>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Dimensions, ImageBackground, StyleSheet } from 'react-native';
+import { View, Text, Dimensions, ImageBackground, StyleSheet, TouchableOpacity } from 'react-native';
 import Svg from 'react-native-svg-uri';
 import {
   collSetting,
@@ -55,29 +55,38 @@ const styles = StyleSheet.create({
 })
 
 const AccountBook = (props) => {
-  const { imgUrl, title, num } = props;
+  const { imgUrl, title, num, pressEvent } = props;
+  const handlePress = () => {
+    if(pressEvent) {
+      pressEvent();
+    }
+  }
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        style={styles.image}
-        source={{uri: imgUrl}}
-        resizeMode='cover'
-        imageStyle={{borderRadius:7}}
-      >
-        <View style={styles.iconContainer}>
-          <Svg width='15' height='15' svgXmlData={collSetting}/>
+    <>
+      <TouchableOpacity activeOpacity={0.8} onPress={handlePress}>
+        <View style={styles.container}>
+          <ImageBackground
+            style={styles.image}
+            source={{uri: imgUrl}}
+            resizeMode='cover'
+            imageStyle={{borderRadius:7}}
+          >
+            <View style={styles.iconContainer}>
+              <Svg width='15' height='15' svgXmlData={collSetting}/>
+            </View>
+            <View style={styles.desc}>
+              <View>
+                <Text style={styles.title}>{title}</Text>
+                <Text style={styles.detail}>{num}篇手账 {props.private ? '私密' : '公开'}</Text>
+              </View>
+              {
+                props.private ? <Svg width='20' height='20' svgXmlData={suo} style={styles.icon}/> : null
+              }
+            </View>
+          </ImageBackground>
         </View>
-        <View style={styles.desc}>
-          <View>
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.detail}>{num}篇手账 {props.private ? '私密' : '公开'}</Text>
-          </View>
-          {
-            props.private ? <Svg width='20' height='20' svgXmlData={suo} style={styles.icon}/> : null
-          }
-        </View>
-      </ImageBackground>
-    </View>
+      </TouchableOpacity>
+    </>
   )
 }
 
