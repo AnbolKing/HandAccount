@@ -7,6 +7,7 @@ import MySetting from './pages/my/setting/index';
 import MyFans from './pages/my/fans/index';
 import myFocus from './pages/my/focus/index';
 import Camera from './components/Camera';
+import Finger from './components/Finger';
 
 const Stack = createStackNavigator();
 
@@ -21,6 +22,7 @@ class Nav extends Component {
           <Stack.Screen name="MyFans" component={MyFans} />
           <Stack.Screen name="MyFocus" component={myFocus} />
           <Stack.Screen name="Camera" component={Camera} />
+          <Stack.Screen name="Finger" component={Finger} />
         </Stack.Navigator>
       </NavigationContainer>
     )

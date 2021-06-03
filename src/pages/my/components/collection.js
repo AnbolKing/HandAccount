@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-scroll-head-tab-view';
 import AccountBook from '../../../components/accountBook';
+import Finger from '../../../components/Finger';
 
 const styles = StyleSheet.create({
   container: {
@@ -33,30 +34,55 @@ const collections = [
   }
 ]
 class Collection extends Component {
+  state = {
+    showFinger: false,
+  }
   handleChoose = (item) => {
-    alert(item.private);
+    if(item.private) {
+      this.setState({
+        showFinger: true,
+      })
+    }
+  }
+  handleSuccess = () => {
+    alert('success')
   }
   render() {
+    const { showFinger } = this.state;
     return (
-      <ScrollView 
-        {...this.props.props}
-      >
-        <View style={styles.container}>
-          {
-            collections.map((item, index) => {
-              return (
-                <AccountBook
-                  pressEvent={() => this.handleChoose(item)}
-                  title={item.title}
-                  num={item.num}
-                  imgUrl={item.imgUrl}
-                  private={item.private}
-                />
-              )
-            })
-          }
-        </View>
-      </ScrollView>
+      <>
+        <ScrollView 
+          {...this.props.props}
+        >
+          <View style={styles.container}>
+            {
+              collections.map(item => {
+                return (
+                  <AccountBook
+                    pressEvent={() => this.handleChoose(item)}
+                    title={item.title}
+                    num={item.num}
+                    imgUrl={item.imgUrl}
+                    private={item.private}
+                  />
+                )
+              })
+            }
+          </View>
+        </ScrollView>
+        {
+          showFinger ? 
+          <Finger 
+            close={() => {
+              this.setState({showFinger: false})
+            }}
+            success={() => {
+              this.handleSuccess();
+            }}
+          /> : 
+          null
+        }
+      </>
     );
   }
 }

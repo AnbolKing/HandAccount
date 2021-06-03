@@ -194,6 +194,7 @@ dependencies {
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation project(path: ':react-native-camera')
     implementation project(':react-native-image-picker')
+    implementation project(':react-native-fingerprint-scanner')
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
