@@ -7,6 +7,14 @@
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/> 
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!-- 手机号码权限 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <!-- <uses-permission android:name="android.permission.READ_PHONE_NUMBERS"/>
+    <uses-permission android:name="android.permission.READ_SMS"/> -->
+    <!-- 手机蓝牙 -->
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
 
     <application
       android:name=".MainApplication"

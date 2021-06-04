@@ -20,6 +20,8 @@ target 'handaccount' do
 
   pod 'react-native-fingerprint-scanner', :path => '../node_modules/react-native-fingerprint-scanner'
 
+  pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
+
   target 'handaccountTests' do
     inherit! :complete
     # Pods for testing

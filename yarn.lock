@@ -6985,6 +6985,11 @@ react-native-confirmation-code-field@^7.1.0:
   resolved "https://registry.nlark.com/react-native-confirmation-code-field/download/react-native-confirmation-code-field-7.1.0.tgz#2394e80ad399cbbcfc7f87bb2eb8bc34eaa43a55"
   integrity sha1-I5ToCtOZy7z8f4e7Lri8NOqkOlU=
 
+react-native-device-info@^8.1.3:
+  version "8.1.3"
+  resolved "https://registry.nlark.com/react-native-device-info/download/react-native-device-info-8.1.3.tgz#022fc01372632bf80c0a6d201aab53344efc715f"
+  integrity sha1-Ai/AE3JjK/gMCm0gGqtTNE78cV8=
+
 react-native-elements@^3.4.1:
   version "3.4.1"
   resolved "https://registry.nlark.com/react-native-elements/download/react-native-elements-3.4.1.tgz#74ea15a9369b05abf4f7421f0ce236ca01fedfe1"
