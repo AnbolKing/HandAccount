@@ -24,7 +24,15 @@ const CustormerBar = (props) => {
         flexDirection: 'row',
       }}
     >
-      <StatusBar backgroundColor={'#fff'} barStyle={'dark-content'} />
+      {
+        activeTab===0 
+        ? (
+          <StatusBar backgroundColor={'#fff'} barStyle={'dark-content'} translucent={false}/>
+        )
+        : (
+          <StatusBar backgroundColor={'#F7F8FD'} barStyle={'dark-content'} translucent={false}/>
+        )
+      }
       <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', flex: 2}}>
       {
         tabs.map((item, index) => {
