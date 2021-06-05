@@ -2,7 +2,18 @@ package com.handaccount;
 
 import com.facebook.react.ReactActivity;
 
+// 开屏
+import android.os.Bundle;
+import org.devio.rn.splashscreen.SplashScreen;
+
 public class MainActivity extends ReactActivity {
+
+  // 开屏
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    SplashScreen.show(this);  // here
+    super.onCreate(savedInstanceState);
+  }
 
   /**
    * Returns the name of the main component registered from JavaScript. This is used to schedule
