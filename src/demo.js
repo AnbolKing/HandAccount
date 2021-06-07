@@ -1,83 +1,76 @@
-/**
- * 全屏界面可滑动，header滑动消失后tab栏可以吸附，且实现tab每个页面上下滚动
- */
+import React, { useCallback, useRef, useMemo } from 'react';
+import { StyleSheet, View, Text, Button } from 'react-native';
+import BottomSheet, { BottomSheetFlatList } from '@gorhom/bottom-sheet';
 
-import React, { useState, useCallback } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import { ScrollTabView, ScrollView, FlatList } from 'react-native-scroll-head-tab-view';
+const Demo = () => {
+  // hooks
+  const sheetRef = useRef<BottomSheet>(null);
 
-function TabView1(props) {
-    const data = new Array(200).fill({});
-    const renderItem = ({ item, index }) => {
-        return (
-            <View style={{ marginVertical: 2, padding: 10, borderWidth: 1 }}>
-                <Text>{'tab1 => ' + index}</Text>
-            </View>
-        );
-    };
-    return <FlatList {...props} data={data} renderItem={renderItem} {...props} />;
-}
+  // variables
+  const data = useMemo(
+    () =>
+      Array(50)
+        .fill(0)
+        .map((_, index) => `index-${index}`),
+    []
+  );
+  const snapPoints = useMemo(() => ['15%', '35%'], []);
 
-function TabView2(props) {
-    const data = new Array(100).fill({});
-    const renderItem = ({ item, index }) => {
-        return (
-            <View style={{ marginVertical: 2, padding: 10, borderWidth: 1 }}>
-                <Text>{'tab2 => ' + index}</Text>
-            </View>
-        );
-    };
-    return <FlatList data={data} renderItem={renderItem} {...props} />;
-}
+  // callbacks
+  const handleSheetChange = useCallback(index => {
+    console.log('handleSheetChange', index);
+  }, []);
+  const handleSnapPress = useCallback(index => {
+    sheetRef.current?.snapTo(index);
+  }, []);
+  const handleClosePress = useCallback(() => {
+    sheetRef.current?.close();
+  }, []);
 
-function TabView3(props) {
-    const data = new Array(20).fill({});
-    return (
-        <ScrollView {...props}>
-            {data.map((o, i) => (
-                <View style={{ marginVertical: 2, padding: 10, borderWidth: 1 }}>
-                    <Text>{'tab3 => ' + i}</Text>
-                </View>
-            ))}
-        </ScrollView>
-    );
-}
-
-export default function Example() {
-    const [headerHeight, setHeaderHeight] = useState(200);
-    const headerOnLayout = useCallback((event) => {
-        const { height } = event.nativeEvent.layout;
-        setHeaderHeight(height);
-    }, []);
-
-    const _renderScrollHeader = useCallback(() => {
-        const data = new Array(10).fill({});
-        return (
-            <View onLayout={headerOnLayout}>
-                <View style={{ backgroundColor: 'pink' }}>
-                    {data.map((o, i) => (
-                        <View style={{ marginVertical: 2, padding: 10, borderWidth: 1 }}>
-                            <Text>{'header => ' + i}</Text>
-                        </View>
-                    ))}
-                </View>
-            </View>
-        );
-    }, []);
-
-    return (
-        <View style={styles.container}>
-            <ScrollTabView headerHeight={headerHeight} renderScrollHeader={_renderScrollHeader}>
-                <TabView1 tabLabel="tab1" />
-                <TabView2 tabLabel="tab2" />
-                <TabView3 tabLabel="tab3" />
-            </ScrollTabView>
-        </View>
-    );
-}
+  // render
+  const renderItem = useCallback(
+    ({ item }) => (
+      <View style={styles.itemContainer}>
+        <Text>{item}</Text>
+      </View>
+    ),
+    []
+  );
+  return (
+    <View style={styles.container}>
+      {/* <Button title="Snap To 90%" onPress={() => handleSnapPress(2)} />
+      <Button title="Snap To 50%" onPress={() => handleSnapPress(1)} />
+      <Button title="Snap To 25%" onPress={() => handleSnapPress(0)} />
+      <Button title="Close" onPress={() => handleClosePress()} /> */}
+      <BottomSheet
+        // ref={c => sheetRef=c}
+        snapPoints={snapPoints}
+        onChange={handleSheetChange}
+      >
+        <BottomSheetFlatList
+          data={data}
+          keyExtractor={i => i}
+          renderItem={renderItem}
+          contentContainerStyle={styles.contentContainer}
+        />
+      </BottomSheet>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
+  container: {
+    flex: 1,
+    paddingTop: 200,
+  },
+  contentContainer: {
+    backgroundColor: 'white',
+  },
+  itemContainer: {
+    padding: 6,
+    margin: 6,
+    backgroundColor: '#eee',
+  },
 });
+
+export default Demo;

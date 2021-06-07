@@ -12,10 +12,12 @@ import {
 import SquareIndex from './pages/square/index';
 import MyIndex from './pages/my/index';
 import CircleIndex from './pages/circle/index';
-import CreateIndex from './pages/create/index';
+// import CreateIndex from './pages/create/index';
 import MessageIndex from './pages/message/index';
+import { NavigationContext } from "@react-navigation/native";
 
 class TabBar extends Component {
+  static contextType = NavigationContext;
   state = {
     selectedTab: 'square',
     pages: [
@@ -39,12 +41,14 @@ class TabBar extends Component {
         selected: 'create',
         renderIcon: () => <Svg width='45' height='40' svgXmlData={create}/>,
         renderSelectedIcon: () => <Svg width='45' height='40' svgXmlData={create}/>,
-        onPress: () => this.setState({ selectedTab: 'create' }),
+        onPress: () => {
+          this.context.navigate('Create');
+        },
         tabStyle: {
           alignItems: 'center',
           marginTop: 20,
         },
-        component: <CreateIndex />
+        // component: <CreateIndex />
       },
       {
         selected: 'message',
