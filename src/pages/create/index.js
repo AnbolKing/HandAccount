@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
+  Keyboard,
 } from 'react-native';
 import Gestures from 'react-native-easy-gestures';
 import Svg from 'react-native-svg-uri';
@@ -15,12 +16,20 @@ import {
   huabi,
   tiezhi,
   beijing,
+  gou,
 } from '../../res/iconSvg';
 import BottomSheet, { BottomSheetFlatList } from '@gorhom/bottom-sheet';
 import { 
   Slider,
-  Icon,
+  Input,
 } from 'react-native-elements';
+import { launchImageLibrary } from 'react-native-image-picker';
+import Header from '../../components/Header';
+import {
+  leftArrow,
+  shanchu,
+} from '../../res/iconSvg';
+import { NavigationContext } from "@react-navigation/native";
 
 const styles = StyleSheet.create({
   createContainer: (x, y, z , opacity) => {
@@ -28,6 +37,8 @@ const styles = StyleSheet.create({
       width: '100%',
       height: '100%',
       backgroundColor: `rgba(${x}, ${y}, ${z}, ${opacity})`,
+      justifyContent: 'center',
+      alignItems: 'center',
     }
   },
   operation: {
@@ -36,7 +47,7 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#ffd9e6',
+    backgroundColor: 'rgba(238, 238, 238, 0.6)',
     paddingTop: 10,
     paddingBottom: 5,
   },
@@ -47,8 +58,9 @@ const styles = StyleSheet.create({
   },
   itemText: {
     paddingTop: 3,
-    fontSize: 12,
-    color: '#000'
+    fontSize: 13,
+    color: '#000',
+    textAlign: 'center',
   },
   itemContainer: {
     margin: 6,
@@ -77,6 +89,7 @@ const styles = StyleSheet.create({
   opacityChoose: {
     alignItems: 'stretch',
     justifyContent: 'center',
+    paddingLeft: 20,
   },
   itemColor: {
     alignItems: 'center',
@@ -91,31 +104,36 @@ const styles = StyleSheet.create({
     width: 25,
     height: 25,
     borderRadius: 50,
-  }
+  },
+  input: {
+    paddingRight: 5,
+    paddingLeft: 5,
+  },
 })
 
 class CreateIndex extends Component {
+  static contextType = NavigationContext;
   state = {
     operations: [
       {
         icon: {
           name: image,
-          width: 26,
-          height: 26
+          width: 35,
+          height: 35
         },
         text: '图片',
         onPress: () => {
           this.setState({
             chooseIndex: 1,
           })
-          console.log('123');
+          this.handleImage();
         },
       },
       {
         icon: {
           name: beijing,
-          width: 26,
-          height: 26
+          width: 35,
+          height: 35
         },
         text: '背景',
         onPress: () => {
@@ -128,22 +146,22 @@ class CreateIndex extends Component {
       {
         icon: {
           name: wenben,
-          width: 26,
-          height: 26
+          width: 35,
+          height: 35
         },
         text: '文本',
         onPress: () => {
           this.setState({
             chooseIndex: 3,
           })
-          console.log('123')
+          this.handleInput();
         },
       },
       {
         icon: {
           name: huabi,
-          width: 26,
-          height: 26
+          width: 35,
+          height: 35
         },
         text: '画笔',
         onPress: () => {
@@ -156,8 +174,8 @@ class CreateIndex extends Component {
       {
         icon: {
           name: tiezhi,
-          width: 26,
-          height: 26
+          width: 35,
+          height: 35
         },
         text: '贴纸',
         onPress: () => {
@@ -172,14 +190,17 @@ class CreateIndex extends Component {
       {
         url: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic.51yuansu.com%2Fpic3%2Fcover%2F02%2F94%2F69%2F5acb472d449d2_610.jpg&refer=http%3A%2F%2Fpic.51yuansu.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1623828498&t=8dd7be51d65bffaaf27ad64bfa4c60de',
         id: '237268_ftb',
+        onPress: () => this.handleCheckImage('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic.51yuansu.com%2Fpic3%2Fcover%2F02%2F94%2F69%2F5acb472d449d2_610.jpg&refer=http%3A%2F%2Fpic.51yuansu.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1623828498&t=8dd7be51d65bffaaf27ad64bfa4c60de'),
       },
       {
         url: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F015e0e584ac637a8012060c802ecfc.png&refer=http%3A%2F%2Fimg.zcool.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1623828549&t=9f73ae3ca6a0cd3ca404e27ea919e7df',
         id: '24f34ftb',
+        onPress: () => this.handleCheckImage('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F015e0e584ac637a8012060c802ecfc.png&refer=http%3A%2F%2Fimg.zcool.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1623828549&t=9f73ae3ca6a0cd3ca404e27ea919e7df'),
       },
       {
         url: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F201907%2F23%2F20190723105631_ZvHRe.thumb.700_0.gif&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1623828637&t=5a3f5705c2a41ddaee031b7facc42a9f',
         id: '34f3',
+        onPress: () => this.handleCheckImage('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F201907%2F23%2F20190723105631_ZvHRe.thumb.700_0.gif&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1623828637&t=5a3f5705c2a41ddaee031b7facc42a9f'),
       },
       {
         url: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Ff27894cef0556abb5a69cc4264823e8999c198a4fbe6-Yj3K51_fw658&refer=http%3A%2F%2Fhbimg.b0.upaiyun.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1623828655&t=79c4b70d1fb6cad34f4a875418aa6291',
@@ -322,11 +343,95 @@ class CreateIndex extends Component {
     ],
     snapPointsChoose: ['0%', '18%', '35%'],
     snapPointsBack: ['0%', '35%'],
+    snapPointsText: ['0%', '14%'],
     chooseIndex: 5,
-    x: 255,
+    x: 224,
     y: 255,
     z: 255,
     value: 1,
+    chooseImage: [],
+    chooseText: [],
+    showDashed: true,
+    showDashedText: true,
+    textValue: '',
+  }
+  handleText = (textValue) => {
+    this.setState({
+      textValue,
+    })
+  }
+  handleCheckText = () => {
+    const { chooseText, textValue } = this.state;
+    chooseText.push(textValue);
+    this.setState({
+      chooseText,
+      textValue: '',
+    })
+    Keyboard.dismiss();
+    this.text.snapTo(0);
+  }
+  handleInput = () => {
+    this.text.snapTo(1);
+  }
+  handleCheckImage = (url) => {
+    const { chooseImage } = this.state;
+    chooseImage.push(url);
+    this.setState({
+      chooseImage,
+    })
+  }
+  handleDaleteImage = (index) => {
+    const { chooseImage } = this.state;
+    let backup = chooseImage;
+    backup.splice(index, 1);
+    this.setState({
+      chooseImage: backup,
+    })
+  }
+  handleDaleteText = (index) => {
+    const { chooseText } = this.state;
+    let backup = chooseText;
+    backup.splice(index, 1);
+    this.setState({
+      chooseText: backup,
+    })
+  }
+  handleCloseDashedImage = () => {
+    this.setState(prev => {
+      return {
+        ...prev,
+        showDashedImage: !prev.showDashedImage,
+      }
+    })
+  }
+  handleCloseDashedText = () => {
+    this.setState(prev => {
+      return {
+        ...prev,
+        showDashedText: !prev.showDashedText,
+      }
+    })
+  }
+  handleImage = () => {
+    const { chooseImage } = this.state;
+    launchImageLibrary(
+      {
+        mediaType: 'photo',
+        includeBase64: false,
+        maxHeight: 200,
+        maxWidth: 200,
+      },
+      (response) => {
+        if(response.didCancel) {
+          return ;
+        }
+        let avatarUrl = response.assets[0].uri;
+        chooseImage.push(avatarUrl);
+        this.setState({
+          chooseImage,
+        })
+      },
+    )
   }
   handleChangeBack = (item) => {
     this.setState({
@@ -359,24 +464,169 @@ class CreateIndex extends Component {
       return chooseData
     }
   }
+  handleReturnBack = () => {
+    // this.context.goBack();
+  }
   renderItem = ({item}) => {
     return (
-      <View style={styles.itemContainer} key={item.id}>
-        <Image
-          source={{uri: item.url}}
-          style={styles.imageContainer}
-        ></Image>
-      </View>
+      <TouchableOpacity style={styles.itemContainer} key={item.id} activeOpacity={0.9} onPress={item.onPress}>
+        <View>
+          <Image
+            source={{uri: item.url}}
+            style={styles.imageContainer}
+          ></Image>
+        </View>
+      </TouchableOpacity>
+    )
+  }
+  renderImage = () => {
+    const { chooseImage, showDashedImage } = this.state;
+    return (
+      chooseImage.map((url, index) => {
+        return (
+          <Gestures
+            draggable={{
+              y: true,
+              x: true,
+            }}
+            scalable={{
+              min: 0.1,
+              max: 7,
+            }}
+            rotatable={true}
+          >
+            <TouchableOpacity
+              activeOpacity={0.9}
+              onPress={() => this.handleCloseDashedImage()}
+            >
+              <View style={{
+                borderWidth: showDashedImage ? 1 : 0,
+                borderColor: '#eee',
+                borderStyle: 'dashed',
+                borderRadius: 1,
+                position: 'relative',
+              }}>
+                <Image
+                  source={{uri: url}}
+                  style={{
+                    width: 100,
+                    height: 100,
+                  }}
+                />
+                {
+                  showDashedImage ? (
+                    <TouchableOpacity
+                      style={{
+                        position: 'absolute',
+                        right: -10,
+                        top: -10,
+                      }}
+                      onPress={() => this.handleDaleteImage(index)}
+                    >
+                      <Svg 
+                        width='23' 
+                        height='23' 
+                        svgXmlData={shanchu} 
+                      />
+                    </TouchableOpacity>
+                  ) : null
+                }
+              </View>
+            </TouchableOpacity>
+          </Gestures>
+        )
+      })
+    )
+  }
+  renderText = () => {
+    const { chooseText, showDashedText } = this.state;
+    return (
+      chooseText.map((text, index) => {
+        return (
+          <Gestures
+            draggable={{
+              y: true,
+              x: true,
+            }}
+            scalable={{
+              min: 0.1,
+              max: 7,
+            }}
+            rotatable={true}
+          >
+            <TouchableOpacity
+              activeOpacity={0.9}
+              onPress={() => this.handleCloseDashedText()}
+            >
+              <View style={{
+                borderWidth: showDashedText ? 1 : 0,
+                borderColor: '#eee',
+                borderStyle: 'dashed',
+                borderRadius: 1,
+                position: 'relative',
+                padding: 5,
+              }}>
+                <Text>{text}</Text>
+                {
+                  showDashedText ? (
+                    <TouchableOpacity
+                      style={{
+                        position: 'absolute',
+                        right: -10,
+                        top: -10,
+                      }}
+                      onPress={() => this.handleDaleteText(index)}
+                    >
+                      <Svg 
+                        width='23' 
+                        height='23' 
+                        svgXmlData={shanchu} 
+                      />
+                    </TouchableOpacity>
+                  ) : null
+                }
+              </View>
+            </TouchableOpacity>
+          </Gestures>
+        )
+      })
     )
   }
   componentDidMount() {
     this.bottom.close();
   }
   render() {
-    const { operations, snapPointsChoose, snapPointsBack, chooseBack, value, x, y, z } = this.state;
+    const { operations, snapPointsChoose, snapPointsBack, snapPointsText, chooseBack, value, x, y, z, textValue } = this.state;
     return (
-      <View style={styles.createContainer(x, y, z , value)}>
+      <View style={{position: 'relative', width: '100%', height: '100%'}}>
+        <Header 
+          title="创作手账"
+          left={
+            <Svg width='23' height='23' svgXmlData={leftArrow} />
+          }
+          leftEvent={this.handleReturnBack}
+          containerStyle={{
+            backgroundColor: '#fff',
+            borderBottomWidth: 1,
+            borderBottomColor: '#eee'
+          }}
+          right={
+            <TouchableOpacity activeOpacity={0.9}>
+              <View style={{borderRadius: 50, paddingTop: 5, paddingBottom: 5, paddingRight: 7, paddingLeft: 7, backgroundColor: '#80AAFF'}}>
+                <Text style={{fontSize: 13, color: '#fff'}}>下一步</Text>
+              </View>
+            </TouchableOpacity>
+          }
+        ></Header>
         <StatusBar backgroundColor="#fff" barStyle='dark-content' />
+        <View style={styles.createContainer(x, y, z , value)}>
+          {
+            this.renderImage()
+          }
+          {
+            this.renderText()
+          }
+        </View>
         <View style={styles.operation}>
           {
             operations.map((item, index) => {
@@ -391,29 +641,6 @@ class CreateIndex extends Component {
             })
           }
         </View>
-        <Gestures
-          draggable={{
-            y: true,
-            x: true,
-          }}
-          scalable={{
-            min: 0.1,
-            max: 7,
-          }}
-          rotatable={true}
-          onEnd={(event, styles) => {
-            console.log(styles);
-          }}
-        >
-          <Image
-            source={require('../../res/imgs/test.png')}
-            style={{
-              width: 100,
-              height: 100,
-              backgroundColor: '#000',
-            }}
-          />
-        </Gestures>
         <BottomSheet
           ref={ref => {
             this.bottom = ref;
@@ -451,10 +678,16 @@ class CreateIndex extends Component {
             </View>
             <View style={styles.opacityChoose}>
               <Slider
+                style={{
+                  width: 300,
+                }}
                 value={value}
+                maximumValue={1}
+                minimumValue={0}
                 onValueChange={(value) => this.handleChangeOpacity(value)}
-                trackStyle={{ height: 5, backgroundColor: 'transparent' }}
+                trackStyle={{ height: 5, backgroundColor: '#D3D3D3' }}
                 thumbStyle={{ height: 17, width: 40, backgroundColor: 'transparent' }}
+                minimumTrackTintColor={'#FFF5EE'}
                 thumbProps={{
                   children: (
                     <View 
@@ -462,7 +695,7 @@ class CreateIndex extends Component {
                         width: 20,
                         height: 20,
                         borderRadius: 50,
-                        backgroundColor: '#D2691E',
+                        backgroundColor: '#C0C0C0',
                       }}
                     />
                   ),
@@ -470,6 +703,36 @@ class CreateIndex extends Component {
               />
               <Text>透明度 {value}</Text>
             </View>
+          </View>
+        </BottomSheet>
+        <BottomSheet
+          ref={ref => {
+            this.text = ref;
+          }}
+          snapPoints={snapPointsText}
+        >
+          <View style={styles.input}>
+            <Input
+              value={textValue}
+              placeholder='请输入文字'
+              inputStyle={{
+                fontSize: 15,
+                paddingTop: 0,
+                paddingBottom: 0,
+              }}
+              inputContainerStyle={{
+                borderWidth: 1,
+                borderColor: '#eee',
+                borderStyle: 'solid',
+                borderRadius: 10,
+              }}
+              rightIcon={
+                <TouchableOpacity onPress={this.handleCheckText}>
+                  <Svg width='30' height='30' svgXmlData={gou} />
+                </TouchableOpacity>
+              }
+              onChangeText={value => this.handleText(value)}
+            />
           </View>
         </BottomSheet>
       </View>
