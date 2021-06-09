@@ -18,7 +18,7 @@ class Nav extends Component {
   render() {
     return (
       <NavigationContainer>
-        <Stack.Navigator headerMode="none" initialRouteName="Create">
+        <Stack.Navigator headerMode="none" initialRouteName="TabBar">
           <Stack.Screen name="TabBar" component={TabBar} />
           <Stack.Screen name="Example" component={Example} />
           <Stack.Screen name="MySetting" component={MySetting} />

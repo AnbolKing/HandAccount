@@ -24,6 +24,8 @@ target 'handaccount' do
 
   pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
 
+  pod 'react-native-view-shot', :path => '../node_modules/react-native-view-shot'
+
   target 'handaccountTests' do
     inherit! :complete
     # Pods for testing

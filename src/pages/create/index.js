@@ -30,6 +30,8 @@ import {
   shanchu,
 } from '../../res/iconSvg';
 import { NavigationContext } from "@react-navigation/native";
+import { captureRef } from "react-native-view-shot";
+// var ReactNative = require('react-native');
 
 const styles = StyleSheet.create({
   createContainer: (x, y, z , opacity) => {
@@ -348,7 +350,7 @@ class CreateIndex extends Component {
     x: 224,
     y: 255,
     z: 255,
-    value: 1,
+    value: 100,
     chooseImage: [],
     chooseText: [],
     showDashed: true,
@@ -465,7 +467,16 @@ class CreateIndex extends Component {
     }
   }
   handleReturnBack = () => {
-    // this.context.goBack();
+    this.context.goBack();
+  }
+  handlePhoto = () => {
+    captureRef(this.account, {
+      format: "jpg",
+      quality: 0.8
+    }).then(
+      uri => alert(uri),
+      error => alert(error)
+    );
   }
   renderItem = ({item}) => {
     return (
@@ -611,7 +622,7 @@ class CreateIndex extends Component {
             borderBottomColor: '#eee'
           }}
           right={
-            <TouchableOpacity activeOpacity={0.9}>
+            <TouchableOpacity activeOpacity={0.9} onPress={this.handlePhoto}>
               <View style={{borderRadius: 50, paddingTop: 5, paddingBottom: 5, paddingRight: 7, paddingLeft: 7, backgroundColor: '#80AAFF'}}>
                 <Text style={{fontSize: 13, color: '#fff'}}>下一步</Text>
               </View>
@@ -619,7 +630,7 @@ class CreateIndex extends Component {
           }
         ></Header>
         <StatusBar backgroundColor="#fff" barStyle='dark-content' />
-        <View style={styles.createContainer(x, y, z , value)}>
+        <View style={styles.createContainer(x, y, z , value)} ref={ref => this.account = ref}>
           {
             this.renderImage()
           }
@@ -681,10 +692,10 @@ class CreateIndex extends Component {
                 style={{
                   width: 300,
                 }}
-                value={value}
-                maximumValue={1}
+                value={value*100}
+                maximumValue={100}
                 minimumValue={0}
-                onValueChange={(value) => this.handleChangeOpacity(value)}
+                onValueChange={(value) => this.handleChangeOpacity(value/100)}
                 trackStyle={{ height: 5, backgroundColor: '#D3D3D3' }}
                 thumbStyle={{ height: 17, width: 40, backgroundColor: 'transparent' }}
                 minimumTrackTintColor={'#FFF5EE'}

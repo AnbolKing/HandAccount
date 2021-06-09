@@ -51,6 +51,7 @@
         "react-native-swiper": "^1.6.0",
         "react-native-tab-navigator": "0.3.4",
         "react-native-vector-icons": "^8.1.0",
+        "react-native-view-shot": "^3.1.2",
         "teaset": "^0.7.5"
     },
     "devDependencies": {
