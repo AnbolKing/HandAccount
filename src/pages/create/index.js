@@ -31,7 +31,9 @@ import {
 } from '../../res/iconSvg';
 import { NavigationContext } from "@react-navigation/native";
 import { captureRef } from "react-native-view-shot";
-// var ReactNative = require('react-native');
+import { Modal } from 'react-native';
+import ImageViewer from 'react-native-image-zoom-viewer';
+// import { DownloadLocalImage } from '../../utils/SaveImage';
 
 const styles = StyleSheet.create({
   createContainer: (x, y, z , opacity) => {
@@ -110,7 +112,13 @@ const styles = StyleSheet.create({
   input: {
     paddingRight: 5,
     paddingLeft: 5,
+    // backgroundColor: '#000',
   },
+  textChoose: {
+    paddingRight: 5,
+    paddingLeft: 5,
+    flexDirection: 'row',
+  }
 })
 
 class CreateIndex extends Component {
@@ -343,19 +351,39 @@ class CreateIndex extends Component {
         text: '巧克力',
       },
     ],
+    chooseTextColor: [
+      {
+        x: 245,
+        y: 245,
+        z: 245,
+        text: '白色',
+      },
+      {
+        x: 0,
+        y: 0,
+        z: 0,
+        text: '黑色',
+      }
+    ],
     snapPointsChoose: ['0%', '18%', '35%'],
     snapPointsBack: ['0%', '35%'],
-    snapPointsText: ['0%', '14%'],
+    snapPointsText: ['0%', '20%'],
     chooseIndex: 5,
     x: 224,
     y: 255,
     z: 255,
+    textX: 255,
+    textY: 255,
+    textZ: 255,
     value: 100,
     chooseImage: [],
     chooseText: [],
     showDashed: true,
     showDashedText: true,
+    showImage: false,
     textValue: '',
+    accountImage: [],
+    accountUrl: '',
   }
   handleText = (textValue) => {
     this.setState({
@@ -442,6 +470,13 @@ class CreateIndex extends Component {
       z: item.z,
     })
   }
+  handleChooseText = (item) => {
+    this.setState({
+      textX: item.x,
+      textY: item.y,
+      textZ: item.z,
+    })
+  }
   handleChangeOpacity = (value) => {
     this.setState({
       value,
@@ -474,9 +509,36 @@ class CreateIndex extends Component {
       format: "jpg",
       quality: 0.8
     }).then(
-      uri => alert(uri),
+      uri => {
+        this.setState({
+          showImage: true,
+          accountUrl: uri,
+          accountImage: [
+            {
+              url: uri,
+            },
+          ]
+        })
+      },
       error => alert(error)
     );
+  }
+  handleDone = () => {
+    this.context.navigate('TabBar');
+    // const { accountUrl } = this.state;
+    // DownloadLocalImage(accountUrl)
+    // .then(res => {
+    //   if(res.statusCode==200){
+    //     alert('图片保存成功')
+    //   }
+    //   else{
+    //     alert('图片保存失败')
+    //   }
+    // })
+    // .catch((error)=>{
+    //   alert('图片保存失败')
+    //   console.log(error)
+    // })
   }
   renderItem = ({item}) => {
     return (
@@ -603,11 +665,34 @@ class CreateIndex extends Component {
       })
     )
   }
+  renderImageHeader = () => {
+    return (
+      <Header 
+        title='预览图'
+        left={
+          <Svg width='23' height='23' svgXmlData={leftArrow} />
+        }
+        leftEvent={() => this.setState({showImage: false})}
+        containerStyle={{
+          backgroundColor: '#fff',
+          borderBottomWidth: 1,
+          borderBottomColor: '#eee'
+        }}
+        right={
+          <TouchableOpacity activeOpacity={0.9} onPress={this.handleDone}>
+            <View style={{borderRadius: 50, paddingTop: 5, paddingBottom: 5, paddingRight: 11, paddingLeft: 11, backgroundColor: '#80AAFF'}}>
+              <Text style={{fontSize: 13, color: '#fff'}}>完成</Text>
+            </View>
+          </TouchableOpacity>
+        }
+      ></Header>
+    )
+  }
   componentDidMount() {
     this.bottom.close();
   }
   render() {
-    const { operations, snapPointsChoose, snapPointsBack, snapPointsText, chooseBack, value, x, y, z, textValue } = this.state;
+    const { operations, snapPointsChoose, snapPointsBack, snapPointsText, chooseBack, value, x, y, z, textValue, showImage, accountImage, chooseTextColor } = this.state;
     return (
       <View style={{position: 'relative', width: '100%', height: '100%'}}>
         <Header 
@@ -727,7 +812,7 @@ class CreateIndex extends Component {
               value={textValue}
               placeholder='请输入文字'
               inputStyle={{
-                fontSize: 15,
+                fontSize: 14,
                 paddingTop: 0,
                 paddingBottom: 0,
               }}
@@ -745,7 +830,33 @@ class CreateIndex extends Component {
               onChangeText={value => this.handleText(value)}
             />
           </View>
+          <View style={styles.textChoose}>
+            {
+              chooseTextColor.map((item, index) => {
+                return (
+                  <TouchableOpacity activeOpacity={0.9} key={index} style={styles.itemColor} onPress={() => this.handleChooseText(item)}>
+                    <View style={{
+                      ...styles.backColor,
+                      backgroundColor: `rgba(${item.x}, ${item.y}, ${item.z}, 1)`,
+                    }}></View>
+                    <Text style={styles.backText}>{item.text}</Text>
+                  </TouchableOpacity>
+                )
+              })
+            }
+          </View>
         </BottomSheet>
+        <Modal visible={showImage} transparent={true}>
+          <ImageViewer 
+            imageUrls={accountImage}
+            onClick={() => { // 图片单击事件
+              this.setState({showImage: false})
+            }}
+            renderHeader={this.renderImageHeader}
+            renderIndicator={() => null}
+            enableSwipeDown={false}
+          />
+        </Modal>
       </View>
     )
   }
