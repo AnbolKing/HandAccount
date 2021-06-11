@@ -47,7 +47,7 @@ const MyIndex = () => {
   return (
     <>
     <Image
-      source={require('../../res/imgs/bg.jpg')}
+      source={{uri: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F018ca05b6c2902a801206a35a98b80.png%401280w_1l_2o_100sh.png&refer=http%3A%2F%2Fimg.zcool.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1625993559&t=6c5ba5726ab038c3022b4ae113207cf5'}}
       resizeMode='cover'
       style={{
         flex: 1,
@@ -76,7 +76,7 @@ const MyIndex = () => {
           backgroundColor:'#E066FF',
           width: 40,
           height: 4,
-          marginLeft: 15
+          marginLeft: 33,
         }}
         tabBarTextStyle={{
           fontSize: 15,
@@ -88,7 +88,7 @@ const MyIndex = () => {
       >
         <TabView style={{flex: 1}} tabLabel="我的手账" name='account' />
         <TabView style={{flex: 1}} tabLabel="我的收藏" name='collection' />
-        <TabView style={{flex: 1}} tabLabel="我的喜欢" name='like' />
+        {/* <TabView style={{flex: 1}} tabLabel="我的喜欢" name='like' /> */}
       </ScrollTabView>
     </View>
     </>
