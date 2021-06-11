@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, Text, Dimensions } from 'react-native';
+import { View, StyleSheet, Image, Text, Dimensions, TouchableOpacity } from 'react-native';
 import Svg from 'react-native-svg-uri';
 import AutoResponsive from 'autoresponsive-react-native';
 import { Avatar } from 'react-native-elements'
 import {
   like
 } from '../res/iconSvg';
+import { NavigationContext } from "@react-navigation/native";
 
 const styles = StyleSheet.create({
   waterfull: {
@@ -19,6 +20,7 @@ const styles = StyleSheet.create({
 })
 
 class Masonry extends Component {
+  static contextType = NavigationContext;
   state = {
     data: [],
     itemWidth: (Dimensions.get('window').width-27)/2,
@@ -27,6 +29,11 @@ class Masonry extends Component {
     return {
       itemMargin: 8,
     };
+  }
+  handleDetail = (url) => {
+    this.context.navigate('Detail', {
+      url,
+    })
   }
   renderChildren = () => {
     return this.state.data.map(item => {
@@ -41,14 +48,16 @@ class Masonry extends Component {
           key={item.id}
         >
           {/* image */}
-          <Image
-            source={{uri: item.url}}
-            style={{
-              width: this.state.itemWidth,
-              height: this.state.itemWidth*item.width/item.height,
-              borderRadius: 8,
-            }}
-          ></Image>
+          <TouchableOpacity activeOpacity={0.9} onPress={() => this.handleDetail(item.url)}>
+            <Image
+              source={{uri: item.url}}
+              style={{
+                width: this.state.itemWidth,
+                height: this.state.itemWidth*item.width/item.height,
+                borderRadius: 8,
+              }}
+            ></Image>
+          </TouchableOpacity>
           {/* desc */}
           <Text 
             style={{

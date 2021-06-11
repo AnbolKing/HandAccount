@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, Text, ScrollView, Dimensions, RefreshControl } from 'react-native';
+import { View, StyleSheet, Image, Text, ScrollView, Dimensions, RefreshControl, TouchableOpacity } from 'react-native';
 import { Avatar } from 'react-native-elements'
 import AutoResponsive from 'autoresponsive-react-native';
 import Swiper from 'react-native-swiper';
 import Svg from 'react-native-svg-uri';
+import { NavigationContext } from "@react-navigation/native";
 import {
   print,
   canlenda,
@@ -40,6 +41,7 @@ const styles = StyleSheet.create({
 })
 
 class Recommend extends Component {
+  static contextType = NavigationContext;
   state = {
     screenWidth: Dimensions.get('window').width,
     itemWidth: (Dimensions.get('window').width-27)/2,
@@ -64,6 +66,11 @@ class Recommend extends Component {
     page: 1,
     data: [],
     isRefreshing: false,
+  }
+  handleDetail = (url) => {
+    this.context.navigate('Detail', {
+      url,
+    })
   }
   handleRenderGrid = () => {
     return this.state.grid.map((item, index) => {
@@ -117,14 +124,16 @@ class Recommend extends Component {
           key={item.id}
         >
           {/* image */}
-          <Image
-            source={{uri: item.url}}
-            style={{
-              width: this.state.itemWidth,
-              height: this.state.itemWidth*item.width/item.height,
-              borderRadius: 8,
-            }}
-          ></Image>
+          <TouchableOpacity activeOpacity={0.9} onPress={() => this.handleDetail(item.url)}>
+            <Image
+              source={{uri: item.url}}
+              style={{
+                width: this.state.itemWidth,
+                height: this.state.itemWidth*item.width/item.height,
+                borderRadius: 8,
+              }}
+            ></Image>
+          </TouchableOpacity>
           {/* desc */}
           <Text 
             style={{

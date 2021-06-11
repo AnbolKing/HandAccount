@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import Svg from 'react-native-svg-uri';
 import {
-  leftArrow,
+  blackLeftArrow,
 } from '../res/iconSvg';
 import { NavigationContext } from "@react-navigation/native";
 
@@ -61,17 +61,20 @@ class Detail extends Component {
   handleBack = () => {
     this.context.goBack();
   }
+  componentDidMount() {
+    console.log(this.props.route.params.url);
+  }
   render() {
     return (
       <View style={styles.detailContainer}>
         <StatusBar backgroundColor='#fff' barStyle='dark-content' />
         <TouchableOpacity style={styles.icon} activeOpacity={0.9} onPress={this.handleBack}>
-          <Svg width='25' height='25' svgXmlData={leftArrow}/>
+          <Svg width='25' height='25' svgXmlData={blackLeftArrow}/>
         </TouchableOpacity>
         <Image
           style={styles.image}
           resizeMode='cover'
-          source={{uri: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F013be25733e6be6ac72526319242ea.png%401280w_1l_2o_100sh.png&refer=http%3A%2F%2Fimg.zcool.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1625995124&t=49e8718bd75d6a2f8659f1316fbec1d4'}}
+          source={{uri: this.props.route.params.url || 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F013be25733e6be6ac72526319242ea.png%401280w_1l_2o_100sh.png&refer=http%3A%2F%2Fimg.zcool.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1625995124&t=49e8718bd75d6a2f8659f1316fbec1d4'}}
         ></Image>
         <Text style={styles.desc}>
           王子安好帅王子安是大帅哥王子安是物联网最帅的王子安是信息工程学院最帅的王子安是南昌大学最帅的！
