@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { StyleSheet, View, Image } from 'react-native';
+import { StyleSheet, View, Image, Text } from 'react-native';
 import { ScrollTabView, ScrollView } from 'react-native-scroll-head-tab-view';
 import MyHeader from './components/myHeader';
 import HandAccount from './components/handaccount';
@@ -15,6 +15,18 @@ const MyIndex = () => {
   const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    top: {
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginTop: 10,
+      position: 'absolute',
+      right: 0,
+      left: 0,
+      marginLeft: "auto",
+      marginRight: "auto",
+      top: 20,
     },
   });
   
@@ -57,6 +69,23 @@ const MyIndex = () => {
         top: 0,
       }}
     ></Image>
+    <View style={styles.top}>
+      <Image 
+        source={{uri: 'https://tva2.sinaimg.cn/large/9bd9b167ly1g1p9qayg3qj20b40b43z9.jpg'}}
+        style={{
+          width: 100,
+          height: 100,
+          borderRadius: 50,
+        }}
+      />
+      <Text style={{
+        textAlign: 'center',
+        fontSize: 17,
+        fontWeight: 'bold',
+        marginTop: 10,
+        color: '#fff'
+      }}>中华小子</Text>
+    </View>
     <View style={styles.container}>
       <ScrollTabView 
         headerHeight={headerHeight} 

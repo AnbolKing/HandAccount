@@ -130,7 +130,7 @@ class Masonry extends Component {
             }}
           >这是一个关于猫猫miao的手账</Text>
           {/* user likes */}
-          <View
+          {/* <View
             style={{
               paddingLeft: 5,
               paddingRight: 5,
@@ -168,7 +168,7 @@ class Masonry extends Component {
               />
               <Text style={{paddingLeft: 2}}>10</Text>
             </View>
-          </View>
+          </View> */}
         </View>
       )
     }, this)

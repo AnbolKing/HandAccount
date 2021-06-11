@@ -65,20 +65,25 @@ const CustormerBar = (props) => {
                   {item}
                 </Text>
               </TouchableOpacity>
-              <View
-                style={{
-                  width: '50%',
-                  backgroundColor: activeTab===index ? '#E066FF' : '#fff',
-                  height: 4,
-                  borderRadius: 10,
-                }}
-              ></View>
+              {
+                activeTab===index ? (
+                  <View
+                    style={{
+                      width: '50%',
+                      // backgroundColor: activeTab===index ? '#E066FF' : '#fff',
+                      backgroundColor: '#E066FF',
+                      height: 4,
+                      borderRadius: 10,
+                    }}
+                  ></View>
+                ) : null
+              }
             </View>
           )
         })
       }
       </View>
-      <View 
+      {/* <View 
         style={{
           display: props.showIcon ? 'flex' : 'none',
           paddingRight: 20,
@@ -91,7 +96,7 @@ const CustormerBar = (props) => {
         <Svg width='22' height='22' svgXmlData={Add} />
         <Svg width='20' height='20' svgXmlData={Calendar} />
         <Svg width='20' height='20' svgXmlData={Info} />
-      </View>
+      </View> */}
     </View>
   )
 }

@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     paddingBottom: 20,
+    paddingTop: 10,
     justifyContent: 'center',
     flex: 1,
   }
@@ -119,7 +120,7 @@ class Recommend extends Component {
             width: this.state.itemWidth,
             backgroundColor: '#fff',
             borderRadius: 8,
-            height: this.state.itemWidth*item.width/item.height+100,
+            height: this.state.itemWidth*item.width/item.height+70,
           }} 
           key={item.id}
         >
@@ -138,14 +139,12 @@ class Recommend extends Component {
           <Text 
             style={{
               paddingTop: 10,
-              paddingBottom: 10,
               paddingLeft: 5,
               paddingRight: 5,
-
             }}
           >这是一个关于猫猫miao的手账</Text>
           {/* user likes */}
-          <View
+          {/* <View
             style={{
               paddingLeft: 5,
               paddingRight: 5,
@@ -183,7 +182,7 @@ class Recommend extends Component {
               />
               <Text style={{paddingLeft: 2}}>10</Text>
             </View>
-          </View>
+          </View> */}
         </View>
       )
     }, this)
@@ -258,7 +257,7 @@ class Recommend extends Component {
         >
           <View style={{flex: 1}}>
             {/* banner图 */}
-            <View style={styles.wrapper}>
+            {/* <View style={styles.wrapper}>
               <Swiper 
                 style={styles.swiper}
                 showsButtons={false}
@@ -295,9 +294,9 @@ class Recommend extends Component {
                 <Image source={require('../../../res/imgs/swiper2.jpg')} style={styles.img}/>
                 <Image source={require('../../../res/imgs/swiper3.jpg')} style={styles.img}/>
               </Swiper>
-            </View>
+            </View> */}
             {/* grid 图标 */}
-            <View 
+            {/* <View 
               style={{
                 flexDirection: 'row',
                 justifyContent: 'center',
@@ -317,7 +316,7 @@ class Recommend extends Component {
               {
                 this.handleRenderGrid()
               }
-            </View>
+            </View> */}
             {/* waterfull 瀑布流 */}
             <View style={styles.waterfull}>  
               <AutoResponsive {...this.getAutoResponsiveProps()} >

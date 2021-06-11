@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableWithoutFeedback, TouchableOpacity, StatusBar } from 'react-native';
+import { View, Text, StyleSheet, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import { NavigationContext } from "@react-navigation/native";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Svg from 'react-native-svg-uri';
@@ -22,17 +22,16 @@ import Modal from './modal';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: 150,
+    height: 15,
     backgroundColor: '#fff',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    marginTop: 170,
+    borderTopLeftRadius: 100,
+    borderTopRightRadius: 100,
+    marginTop: 185,
   },
   top: {
-    flexDirection: 'column',
-    justifyContent: 'center',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
     alignItems: 'center',
-    marginTop: 10,
   },
   lib: {
     alignSelf: 'flex-start',
@@ -195,10 +194,9 @@ class MyHeader extends Component {
     ]
   }
   handleChangeAnatar = () => {
-    // this.setState({
-    //   isVisible: true,
-    // })
-    this.context.navigate("MySetting");
+    this.setState({
+      isVisible: true,
+    })
   }
   handleFromCarema = () => {
     launchCamera(
@@ -255,27 +253,15 @@ class MyHeader extends Component {
     const { isVisible, bottomList, isOverlay, avatarUrl } = this.state; 
     return (
       <>
-        {/* <StatusBar backgroundColor="transparent" translucent={true} /> */}
         <View style={styles.container}>
-          <View style={styles.top}>
+          {/* <View style={styles.top}>
             <Avatar 
               onPress={this.handleChangeAnatar}
               size='large'
               rounded
               source={{uri: avatarUrl}}
-              style={{
-                width: 100,
-                height: 100,
-                borderRadius: 50,
-              }}
             />
-            <Text style={{
-              textAlign: 'center',
-              fontSize: 15,
-              fontWeight: 'bold',
-              marginTop: 10,
-            }}>中华小子</Text>
-            {/* <View style={styles.lib}>
+            <View style={styles.lib}>
               <Text style={styles.word}>站内号：272344341</Text>
               <View style={styles.tabs}>
                 <View style={styles.tabItem}>
@@ -325,9 +311,9 @@ class MyHeader extends Component {
                   ...styles.buttonStyle
                 }}
               />
-            </View> */}
+            </View>
           </View>
-          {/* <View style={styles.middle}>
+          <View style={styles.middle}>
             <View style={styles.button}>
               <Text style={styles.name}>
                 中华小子

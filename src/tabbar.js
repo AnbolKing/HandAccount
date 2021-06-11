@@ -29,14 +29,14 @@ class TabBar extends Component {
         onPress: () => this.setState({ selectedTab: 'square' }),
         component: <SquareIndex />
       },
-      {
-        selected: 'circle',
-        title: '圈子',
-        renderIcon: () => <Svg width='28' height='30' svgXmlData={circle} />,
-        renderSelectedIcon: () => <Svg width='28' height='30' svgXmlData={selectCircle} />,
-        onPress: () => this.setState({ selectedTab: 'circle' }),
-        component: <CircleIndex />
-      },
+      // {
+      //   selected: 'circle',
+      //   title: '圈子',
+      //   renderIcon: () => <Svg width='28' height='30' svgXmlData={circle} />,
+      //   renderSelectedIcon: () => <Svg width='28' height='30' svgXmlData={selectCircle} />,
+      //   onPress: () => this.setState({ selectedTab: 'circle' }),
+      //   component: <CircleIndex />
+      // },
       {
         selected: 'create',
         renderIcon: () => <Svg width='45' height='40' svgXmlData={create}/>,
@@ -46,18 +46,18 @@ class TabBar extends Component {
         },
         tabStyle: {
           alignItems: 'center',
-          marginTop: 20,
+          // marginTop: 20,
         },
         // component: <CreateIndex />
       },
-      {
-        selected: 'message',
-        title: '消息',
-        renderIcon: () => <Svg width='25' height='30' svgXmlData={message} />,
-        renderSelectedIcon: () => <Svg width='25' height='30' svgXmlData={selectMessage} />,
-        onPress: () => this.setState({ selectedTab: 'message' }),
-        component: <MessageIndex />
-      },
+      // {
+      //   selected: 'message',
+      //   title: '消息',
+      //   renderIcon: () => <Svg width='25' height='30' svgXmlData={message} />,
+      //   renderSelectedIcon: () => <Svg width='25' height='30' svgXmlData={selectMessage} />,
+      //   onPress: () => this.setState({ selectedTab: 'message' }),
+      //   component: <MessageIndex />
+      // },
       {
         selected: 'my',
         title: '我的',
@@ -76,8 +76,23 @@ class TabBar extends Component {
           tabBarStyle={{
             height: 60,
             alignItems: 'center',
+            // borderRadius: 40,
+            // marginBottom: 100,
+            // borderColor: '#eee',
+            // borderWidth: 0.5,
+            // backgroundColor: '#fff',
+            // marginLeft: 10,
+            // marginRight: 10,
+            paddingLeft: 10,
+            paddingRight: 10,
           }}
           hidesTabTouch={true}
+          tabBarShadowStyle={{
+            display: 'none',
+          }}
+          sceneStyle={{
+            display: 'none',
+          }}
         >
           {
             pages.map((item, index) => {
@@ -91,6 +106,7 @@ class TabBar extends Component {
                   onPress={item.onPress}
                   selectedTitleStyle={{color: '#c863b5'}}
                   tabStyle={item.tabStyle}
+                  titleStyle={item.titleStyle}
                 >
                   {item.component}
                 </TabNavigator.Item>

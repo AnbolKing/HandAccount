@@ -38,6 +38,9 @@ import CameraRoll from "@react-native-community/cameraroll";
 import {
   hasPermission,
 } from '../../utils/permission';
+import {
+  Toast,
+} from 'teaset';
 
 const styles = StyleSheet.create({
   createContainer: (x, y, z , opacity) => {
@@ -535,11 +538,12 @@ class CreateIndex extends Component {
     }
     let promise = CameraRoll.save(this.state.accountUrl);
     promise.then(function (result) {
-      alert('保存成功！地址如下：\n' + result);
+      // alert('保存成功！地址如下：\n' + result);
+      Toast.success('Toast success');
     }).catch(function (error) {
       alert('保存失败！\n' + error);
     });
-    // this.context.navigate('TabBar');
+    this.context.navigate('TabBar');
   }
   renderItem = ({item}) => {
     return (

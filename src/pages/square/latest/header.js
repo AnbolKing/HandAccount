@@ -58,7 +58,7 @@ class LatestHeader extends Component {
     return (
       <View>
         {/* banner图 */}
-        <View style={styles.wrapper}>
+        {/* <View style={styles.wrapper}>
           <Swiper 
             style={styles.swiper}
             showsButtons={false}
@@ -95,8 +95,8 @@ class LatestHeader extends Component {
             <Image source={require('../../../res/imgs/swiper2.jpg')} style={styles.img}/>
             <Image source={require('../../../res/imgs/swiper3.jpg')} style={styles.img}/>
           </Swiper>
-        </View>
-        <View style={styles.buttonGroup}>
+        </View> */}
+        {/* <View style={styles.buttonGroup}>
           <View style={styles.button}>
             <Svg width='28' height='28' svgXmlData={print} />
             <Text style={styles.buttonText}>打印手账</Text>
@@ -109,7 +109,7 @@ class LatestHeader extends Component {
             <Svg width='28' height='28' svgXmlData={like} />
             <Text style={styles.buttonText}>手账测评</Text>
           </View>
-        </View>
+        </View> */}
       </View>
     )
   }
