@@ -7,6 +7,7 @@ import {
   Image,
   TouchableOpacity,
   Keyboard,
+  Platform,
 } from 'react-native';
 import Gestures from 'react-native-easy-gestures';
 import Svg from 'react-native-svg-uri';
@@ -33,7 +34,10 @@ import { NavigationContext } from "@react-navigation/native";
 import { captureRef } from "react-native-view-shot";
 import { Modal } from 'react-native';
 import ImageViewer from 'react-native-image-zoom-viewer';
-// import { DownloadLocalImage } from '../../utils/SaveImage';
+import CameraRoll from "@react-native-community/cameraroll";
+import {
+  hasPermission,
+} from '../../utils/permission';
 
 const styles = StyleSheet.create({
   createContainer: (x, y, z , opacity) => {
@@ -522,23 +526,20 @@ class CreateIndex extends Component {
       },
       error => alert(error)
     );
-  }
-  handleDone = () => {
-    this.context.navigate('TabBar');
-    // const { accountUrl } = this.state;
-    // DownloadLocalImage(accountUrl)
-    // .then(res => {
-    //   if(res.statusCode==200){
-    //     alert('图片保存成功')
-    //   }
-    //   else{
-    //     alert('图片保存失败')
-    //   }
-    // })
-    // .catch((error)=>{
-    //   alert('图片保存失败')
-    //   console.log(error)
-    // })
+  }  
+  handleDone = async () => {
+    let permission = await hasPermission();
+    console.log(permission);
+    if(!permission) {
+      return ;
+    }
+    let promise = CameraRoll.save(this.state.accountUrl);
+    promise.then(function (result) {
+      alert('保存成功！地址如下：\n' + result);
+    }).catch(function (error) {
+      alert('保存失败！\n' + error);
+    });
+    // this.context.navigate('TabBar');
   }
   renderItem = ({item}) => {
     return (
@@ -688,7 +689,7 @@ class CreateIndex extends Component {
       ></Header>
     )
   }
-  componentDidMount() {
+  componentDidMount = () => {
     this.bottom.close();
   }
   render() {

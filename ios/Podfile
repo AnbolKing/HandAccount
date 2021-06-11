@@ -26,6 +26,8 @@ target 'handaccount' do
 
   pod 'react-native-view-shot', :path => '../node_modules/react-native-view-shot'
 
+  pod 'RNFS', :path => '../node_modules/react-native-fs'
+
   target 'handaccountTests' do
     inherit! :complete
     # Pods for testing
