@@ -28,6 +28,8 @@ target 'handaccount' do
 
   pod 'RNFS', :path => '../node_modules/react-native-fs'
 
+  pod 'react-native-blur', :path => '../node_modules/react-native-blur'
+
   target 'handaccountTests' do
     inherit! :complete
     # Pods for testing

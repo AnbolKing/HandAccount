@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, Text, Dimensions, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Image, Text, Dimensions, TouchableOpacity, findNodeHandle } from 'react-native';
 import Svg from 'react-native-svg-uri';
 import AutoResponsive from 'autoresponsive-react-native';
 import { Avatar } from 'react-native-elements'
@@ -7,6 +7,10 @@ import {
   like
 } from '../res/iconSvg';
 import { NavigationContext } from "@react-navigation/native";
+import { BlurView } from 'react-native-blur';
+import {
+  draft,
+} from '../res/iconSvg';
 
 const styles = StyleSheet.create({
   waterfull: {
@@ -16,7 +20,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     justifyContent: 'center',
     flex: 1,
-  }
+  },
 })
 
 class Masonry extends Component {
@@ -24,6 +28,7 @@ class Masonry extends Component {
   state = {
     data: [],
     itemWidth: (Dimensions.get('window').width-27)/2,
+    imgRef: null,
   }
   getAutoResponsiveProps = () => {
     return {
@@ -35,6 +40,14 @@ class Masonry extends Component {
       url,
     })
   }
+  handleImageLoaded = () => {
+    console.log('load end');
+    setTimeout(() => {
+      this.setState({ 
+        imgRef: findNodeHandle(this.backgroundImage) 
+      })
+    }, 0)
+  }
   renderChildren = () => {
     return this.state.data.map(item => {
       return (
@@ -44,20 +57,68 @@ class Masonry extends Component {
             backgroundColor: '#fff',
             borderRadius: 8,
             height: this.state.itemWidth*item.width/item.height+100,
+            justifyContent: 'center',
+            alignItems: 'center',
           }} 
           key={item.id}
         >
           {/* image */}
-          <TouchableOpacity activeOpacity={0.9} onPress={() => this.handleDetail(item.url)}>
-            <Image
-              source={{uri: item.url}}
-              style={{
-                width: this.state.itemWidth,
-                height: this.state.itemWidth*item.width/item.height,
-                borderRadius: 8,
-              }}
-            ></Image>
-          </TouchableOpacity>
+          {
+            item.isDraft ? (
+              <TouchableOpacity 
+                activeOpacity={1} 
+                onPress={() => this.handleDetail(item.url)}
+                style={{
+                  position: 'relative',
+                  width: this.state.itemWidth,
+                  height: this.state.itemWidth*item.width/item.height,
+                  borderRadius: 8,
+                  overflow: 'hidden',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Image
+                  ref={img => { this.backgroundImage = img }}
+                  source={{uri: item.url}}
+                  style={{
+                    width: this.state.itemWidth,
+                    height: this.state.itemWidth*item.width/item.height,
+                    position: 'absolute',
+                    top: 0, left: 0,
+                  }}
+                  onLoadEnd={this.handleImageLoaded}
+                ></Image>
+                <BlurView
+                  viewRef={this.state.imgRef}
+                  blurType="light"
+                  blurAmount={5}
+                  style={{
+                    position: 'absolute',
+                    top: 0, left: 0,
+                    zIndex: 9,
+                    width: this.state.itemWidth,
+                    height: this.state.itemWidth*item.width/item.height,
+                  }}
+                ></BlurView>
+                <View style={{justifyContent: 'center', alignItems: 'center', zIndex: 10,}}>
+                  <Svg width='35' height='35' svgXmlData={draft} />
+                  <Text style={{fontSize: 15, color: '#fff', fontWeight: 'bold', marginTop: 10}}>草稿箱</Text>
+                </View>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity activeOpacity={0.9} onPress={() => this.handleDetail(item.url)}>
+                <Image
+                  source={{uri: item.url}}
+                  style={{
+                    width: this.state.itemWidth,
+                    height: this.state.itemWidth*item.width/item.height,
+                    borderRadius: 8,
+                  }}
+                ></Image>
+              </TouchableOpacity>
+            )
+          }
           {/* desc */}
           <Text 
             style={{

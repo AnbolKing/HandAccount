@@ -125,6 +125,9 @@ def jscFlavor = 'org.webkit:android-jsc:+'
 def enableHermes = project.ext.react.get("enableHermes", false);
 
 android {
+    // make sure to use 23.0.3 or greater
+    buildToolsVersion '23.0.3' // 这行与我根目录中的build.grale的版本一致
+
     ndkVersion rootProject.ext.ndkVersion
 
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -135,6 +138,10 @@ android {
     }
 
     defaultConfig {
+        // congif react-native-blur
+        renderscriptTargetApi 23
+        renderscriptSupportModeEnabled true
+
         applicationId "com.handaccount"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion

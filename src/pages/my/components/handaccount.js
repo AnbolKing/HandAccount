@@ -18,6 +18,7 @@ class HandAccount extends Component {
         page,
       }
     });
+    (res.data)[0].isDraft = true,
     this.setState(prev => {
       return {
         ...prev,
@@ -25,6 +26,7 @@ class HandAccount extends Component {
         data: res.data,
       }
     })
+    console.log(res.data);
   }
 
   componentDidMount() {
