@@ -14,7 +14,8 @@ const MyIndex = () => {
   }, []);
   const styles = StyleSheet.create({
     container: {
-        flex: 1,
+      flex: 1,
+      elevation: 6,
     },
     top: {
       flexDirection: 'column',
@@ -59,7 +60,7 @@ const MyIndex = () => {
   return (
     <>
     <Image
-      source={{uri: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F018ca05b6c2902a801206a35a98b80.png%401280w_1l_2o_100sh.png&refer=http%3A%2F%2Fimg.zcool.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1625993559&t=6c5ba5726ab038c3022b4ae113207cf5'}}
+      source={{uri: 'https://i.loli.net/2021/06/13/3u4dHWKZLemlOnj.png'}}
       resizeMode='cover'
       style={{
         flex: 1,
@@ -67,24 +68,42 @@ const MyIndex = () => {
         height: 200,
         position: 'absolute',
         top: 0,
+        backgroundColor: '#F7F7F7'
       }}
     ></Image>
     <View style={styles.top}>
       <Image 
-        source={{uri: 'https://tva2.sinaimg.cn/large/9bd9b167ly1g1p9qayg3qj20b40b43z9.jpg'}}
+        source={{uri: 'https://z3.ax1x.com/2021/06/13/2Iod8P.jpg'}}
         style={{
           width: 100,
           height: 100,
           borderRadius: 50,
         }}
       />
-      <Text style={{
-        textAlign: 'center',
-        fontSize: 17,
-        fontWeight: 'bold',
-        marginTop: 10,
-        color: '#fff'
-      }}>中华小子</Text>
+      <View style={{
+        paddingTop: 3,
+        paddingBottom: 3,
+        paddingRight: 25,
+        paddingLeft: 25,
+        backgroundColor: 'rgba(255, 255, 255, 0.8)',
+        borderRadius: 40,
+        marginTop: 15,
+        shadowColor: "#eee",
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.9,
+        shadowRadius: 3.84,
+        elevation: 3,
+      }}>
+        <Text style={{
+          textAlign: 'center',
+          fontSize: 17,
+          // fontWeight: 'bold',
+          color: '#000',
+        }}>用户昵称</Text>
+      </View>
     </View>
     <View style={styles.container}>
       <ScrollTabView 
@@ -102,10 +121,10 @@ const MyIndex = () => {
         //   )
         // }}
         tabBarUnderlineStyle={{
-          backgroundColor:'#E066FF',
-          width: 40,
-          height: 4,
-          marginLeft: 33,
+          backgroundColor:'#7C83D5',
+          // width: 50,
+          // height: 4,
+          // marginLeft: 33,
         }}
         tabBarTextStyle={{
           fontSize: 15,

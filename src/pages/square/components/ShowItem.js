@@ -53,8 +53,8 @@ const handleRenderItem = (item, imgStyle) => {
       {/* <Image source={require('../../../res/imgs/exampleItem.png')} style={{...styles.image, ...imgStyle}}></Image> */}
       <Image source={{uri: item.item.url}} style={{...styles.image, ...imgStyle}}></Image>
       <View style={styles.imgText}>
-        <Text style={styles.imgTitle}>萌宠乐园</Text>
-        <Text style={styles.imgPrice}>免费</Text>
+        <Text style={styles.imgTitle}>{item.item.text || '手账素材'}</Text>
+        {/* <Text style={styles.imgPrice}>免费</Text> */}
       </View>
     </View>
   )

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import ScrollableTabView  from 'react-native-scrollable-tab-view';
 import CustormerBar from '../../components/CustormerBar';
 import Recommend from "./components/Recommend";
-import Latest from "./components/Latest";
+// import Latest from "./components/Latest";
+import NewLatest from './components/newLatest';
 class SquareIndex extends Component {
   render() {
     return (
@@ -11,7 +12,7 @@ class SquareIndex extends Component {
         renderTabBar={() => <CustormerBar showIcon={true}/>}
       >
         <Recommend tabLabel='推荐' />
-        <Latest tabLabel='最新' />
+        <NewLatest tabLabel='素材' />
       </ScrollableTabView>
     )
   }

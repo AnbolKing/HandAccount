@@ -56,7 +56,7 @@ const CustormerBar = (props) => {
               >
                 <Text
                   style={{
-                    color: activeTab===index ? '#000' : '#B5B5B5',
+                    color: activeTab===index ? '#4D5BBE' : '#101010',
                     fontSize: 20,
                     fontWeight: 'bold',
                     ...props.wordStyle,
@@ -71,8 +71,8 @@ const CustormerBar = (props) => {
                     style={{
                       width: '50%',
                       // backgroundColor: activeTab===index ? '#E066FF' : '#fff',
-                      backgroundColor: '#E066FF',
-                      height: 4,
+                      backgroundColor: '#7C83D5',
+                      height: 3,
                       borderRadius: 10,
                     }}
                   ></View>

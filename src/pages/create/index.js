@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Keyboard,
   Platform,
+  ImageBackground,
 } from 'react-native';
 import Gestures from 'react-native-easy-gestures';
 import Svg from 'react-native-svg-uri';
@@ -38,9 +39,7 @@ import CameraRoll from "@react-native-community/cameraroll";
 import {
   hasPermission,
 } from '../../utils/permission';
-import {
-  Toast,
-} from 'teaset';
+import ScrollableTabView  from 'react-native-scrollable-tab-view';
 
 const styles = StyleSheet.create({
   createContainer: (x, y, z , opacity) => {
@@ -58,9 +57,7 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'rgba(238, 238, 238, 0.6)',
-    paddingTop: 10,
-    paddingBottom: 5,
+    backgroundColor: '#fff',
   },
   operationItem: {
     justifyContent: 'center',
@@ -134,9 +131,9 @@ class CreateIndex extends Component {
     operations: [
       {
         icon: {
-          name: image,
-          width: 35,
-          height: 35
+          name: 'https://z3.ax1x.com/2021/06/13/2IIu6S.png',
+          width: 42,
+          height: 42
         },
         text: '图片',
         onPress: () => {
@@ -148,9 +145,9 @@ class CreateIndex extends Component {
       },
       {
         icon: {
-          name: beijing,
-          width: 35,
-          height: 35
+          name: 'https://z3.ax1x.com/2021/06/13/2IIlwj.png',
+          width: 42,
+          height: 42
         },
         text: '背景',
         onPress: () => {
@@ -162,9 +159,9 @@ class CreateIndex extends Component {
       },
       {
         icon: {
-          name: wenben,
-          width: 35,
-          height: 35
+          name: 'https://z3.ax1x.com/2021/06/13/2IIKOg.png',
+          width: 42,
+          height: 42
         },
         text: '文本',
         onPress: () => {
@@ -176,113 +173,248 @@ class CreateIndex extends Component {
       },
       {
         icon: {
-          name: huabi,
-          width: 35,
-          height: 35
+          name: 'https://z3.ax1x.com/2021/06/13/2IIQmQ.png',
+          width: 42,
+          height: 42
         },
         text: '画笔',
         onPress: () => {
           this.setState({
             chooseIndex: 4
           })
-          this.handleChoose()
+          this.handleChooseDeep()
         }
       },
       {
         icon: {
-          name: tiezhi,
-          width: 35,
-          height: 35
+          name: 'https://z3.ax1x.com/2021/06/13/2IInl8.png',
+          width: 42,
+          height: 42
         },
         text: '贴纸',
         onPress: () => {
           this.setState({
-            chooseIndex: 4
+            chooseIndex: 5
           })
-          this.handleChoose()
+          this.handleChooseBack()
         }
       },
     ],
     chooseData: [
       {
-        url: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic.51yuansu.com%2Fpic3%2Fcover%2F02%2F94%2F69%2F5acb472d449d2_610.jpg&refer=http%3A%2F%2Fpic.51yuansu.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1623828498&t=8dd7be51d65bffaaf27ad64bfa4c60de',
-        id: '237268_ftb',
-        onPress: () => this.handleCheckImage('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic.51yuansu.com%2Fpic3%2Fcover%2F02%2F94%2F69%2F5acb472d449d2_610.jpg&refer=http%3A%2F%2Fpic.51yuansu.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1623828498&t=8dd7be51d65bffaaf27ad64bfa4c60de'),
+        url: 'https://z3.ax1x.com/2021/06/12/25PMcQ.png',
+        onPress: () => this.handleCheckImage('https://z3.ax1x.com/2021/06/12/25PMcQ.png')
       },
       {
-        url: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F015e0e584ac637a8012060c802ecfc.png&refer=http%3A%2F%2Fimg.zcool.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1623828549&t=9f73ae3ca6a0cd3ca404e27ea919e7df',
-        id: '24f34ftb',
-        onPress: () => this.handleCheckImage('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F015e0e584ac637a8012060c802ecfc.png&refer=http%3A%2F%2Fimg.zcool.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1623828549&t=9f73ae3ca6a0cd3ca404e27ea919e7df'),
+        url: 'https://z3.ax1x.com/2021/06/12/25Pu9S.png',
+        onPress: () => this.handleCheckImage('https://z3.ax1x.com/2021/06/12/25Pu9S.png')
       },
       {
-        url: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F201907%2F23%2F20190723105631_ZvHRe.thumb.700_0.gif&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1623828637&t=5a3f5705c2a41ddaee031b7facc42a9f',
-        id: '34f3',
-        onPress: () => this.handleCheckImage('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F201907%2F23%2F20190723105631_ZvHRe.thumb.700_0.gif&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1623828637&t=5a3f5705c2a41ddaee031b7facc42a9f'),
+        url: 'https://z3.ax1x.com/2021/06/12/25PK1g.png',
+        onPress: () => this.handleCheckImage('https://z3.ax1x.com/2021/06/12/25PK1g.png')
       },
       {
-        url: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Ff27894cef0556abb5a69cc4264823e8999c198a4fbe6-Yj3K51_fw658&refer=http%3A%2F%2Fhbimg.b0.upaiyun.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1623828655&t=79c4b70d1fb6cad34f4a875418aa6291',
-        id: 'q34fq3',
+        url: 'https://z3.ax1x.com/2021/06/12/25P1ns.png',
+        onPress: () => this.handleCheckImage('https://z3.ax1x.com/2021/06/12/25P1ns.png')
       },
       {
-        url: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fku.90sjimg.com%2Felement_origin_min_pic%2F18%2F08%2F08%2Fcedc8a86ff877ae207f20965a6e33348.jpg%21%2Ffwfh%2F804x804%2Fquality%2F90%2Funsharp%2Ftrue%2Fcompress%2Ftrue&refer=http%3A%2F%2Fku.90sjimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1623828672&t=79243e7f6740ff16f067c23b4bcd1ef4',
-        id: '134f314t',
+        url: 'https://z3.ax1x.com/2021/06/12/25PQXj.png',
       },
       {
-        url: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic31.nipic.com%2F20130720%2F12342023_203825299000_2.jpg&refer=http%3A%2F%2Fpic31.nipic.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1623828791&t=1fddc1d2ae808912b56f10a540600d41',
-        id: '237268_ftb',
+        url: 'https://z3.ax1x.com/2021/06/12/25P3Bn.png',
       },
       {
-        url: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20200306%2F1b1d96b013c24fb48873a497b73aadce.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1623828815&t=8934ccf1bb29c0a28df633e2982513c4',
-        id: '24f34ftb',
+        url: 'https://z3.ax1x.com/2021/06/12/25P87q.png',
       },
       {
-        url: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Ff27894cef0556abb5a69cc4264823e8999c198a4fbe6-Yj3K51_fw658&refer=http%3A%2F%2Fhbimg.b0.upaiyun.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1623828655&t=79c4b70d1fb6cad34f4a875418aa6291',
-        id: 'q34fq3',
+        url: 'https://z3.ax1x.com/2021/06/12/25PJA0.png',
       },
       {
-        url: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fku.90sjimg.com%2Felement_origin_min_pic%2F18%2F08%2F08%2Fcedc8a86ff877ae207f20965a6e33348.jpg%21%2Ffwfh%2F804x804%2Fquality%2F90%2Funsharp%2Ftrue%2Fcompress%2Ftrue&refer=http%3A%2F%2Fku.90sjimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1623828672&t=79243e7f6740ff16f067c23b4bcd1ef4',
-        id: '134f314t',
+        url: 'https://z3.ax1x.com/2021/06/12/25PYNV.png',
       },
       {
-        url: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic31.nipic.com%2F20130720%2F12342023_203825299000_2.jpg&refer=http%3A%2F%2Fpic31.nipic.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1623828791&t=1fddc1d2ae808912b56f10a540600d41',
-        id: '237268_ftb',
+        url: 'https://z3.ax1x.com/2021/06/12/25PthT.png',
       },
       {
-        url: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20200306%2F1b1d96b013c24fb48873a497b73aadce.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1623828815&t=8934ccf1bb29c0a28df633e2982513c4',
-        id: '24f34ftb',
+        url: 'https://z3.ax1x.com/2021/06/12/25PU9U.png',
       },
       {
-        url: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.cpnic.com%2FUploadFiles%2Fimg_0_3112340721_754518423_26.jpg&refer=http%3A%2F%2Fwww.cpnic.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1623828896&t=2f3f6ccedcca0736abcf9d8bf6ea87c1',
-        id: '34f3',
+        url: 'https://z3.ax1x.com/2021/06/12/25Pa3F.png',
       },
       {
-        url: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201711%2F18%2F20171118001133_vytPB.thumb.400_0.jpeg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1623828919&t=d7487c07e89ac3c832d5220f0a59b92b',
-        id: 'q34fq3',
+        url: 'https://z3.ax1x.com/2021/06/12/25CIYT.png'
       },
       {
-        url: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201609%2F06%2F20160906222422_LFTyi.thumb.700_0.jpeg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1623828936&t=d62aa07496e5ce0760389c3ad7b13836',
-        id: '134f314t',
+        url: 'https://z3.ax1x.com/2021/06/12/25C5kV.png'
       },
       {
-        url: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F908c7a2cf9bf480ca5360074d889669f024cf86f10696-4zhwon_fw658&refer=http%3A%2F%2Fhbimg.b0.upaiyun.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1623829105&t=2235e1644d2656b533b626eb18666a57',
-        id: '237268_ftb',
+        url: 'https://z3.ax1x.com/2021/06/12/25Cwwt.png'
       },
       {
-        url: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F0164485c49566da801203d22de83e0.jpg%402o.jpg&refer=http%3A%2F%2Fimg.zcool.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1623829138&t=3d9ad312d272965bef070890d8fcd20d',
-        id: '24f34ftb',
+        url: 'https://z3.ax1x.com/2021/06/12/25C6Sg.png'
       },
       {
-        url: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F19%2F04%2F26%2F11154f34c1ea93584209f1b10b1d67f0.jpg&refer=http%3A%2F%2Fbpic.588ku.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1623829162&t=42b70919c1c563864c1d4a7c36aefa19',
-        id: '34f3',
+        url: 'https://z3.ax1x.com/2021/06/12/25CrY8.png'
       },
       {
-        url: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fbpic.588ku.com%2Felement_pic%2F18%2F04%2F29%2F820e4324e5c616d21f5912308f8058d4.jpg&refer=http%3A%2F%2Fbpic.588ku.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1623829263&t=fae9b2894dd368a634d61cd8ed18af18',
-        id: 'q34fq3',
+        url: 'https://z3.ax1x.com/2021/06/12/25C0TP.png'
       },
       {
-        url: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F66e4ae041d20ca7f73fc99b989a09dbe4594dbd2128f0-lDWkgp_fw658&refer=http%3A%2F%2Fhbimg.b0.upaiyun.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1623829279&t=0bf67a7b5ce25263172d0c1c1666e1a9',
-        id: '134f314t',
-      }
+        url: 'https://z3.ax1x.com/2021/06/12/25CDFf.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/25C2Os.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/25CsfS.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/25CclQ.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/25Cgyj.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/25CWmn.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/25ChT0.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/25Cfwq.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24qJkd.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24q8TH.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24q30e.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24q1mD.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24qQOO.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24qM6K.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24qKl6.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24quSx.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24qmf1.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24qeYR.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24qZk9.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24qETJ.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24qAw4.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24qkmF.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24qiOU.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24TTzT.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24bnsS.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24bmM8.png',
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24bQaj.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24bJzV.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24buqg.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24bMZQ.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24blIs.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24b3in.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24bGR0.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24b8Gq.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24bwdJ.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24b0o9.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24brJ1.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24bDiR.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24bsRx.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24byz6.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24bcQK.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24bgsO.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24b2LD.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24bWee.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24bfdH.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24b5FA.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24bhod.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24bIJI.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24boWt.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24bHQf.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24b7SP.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24bby8.png'
+      },
     ],
     chooseBack: [
       {
@@ -372,8 +504,66 @@ class CreateIndex extends Component {
         text: '黑色',
       }
     ],
+    chooseDeep: [
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24g7Hf.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/242Suq.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24g5jI.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24gTDP.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24gj3j.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/242F5F.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/242iUU.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/242pD0.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/2429bV.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24RW6A.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24Rcfe.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24RfOI.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24R2SH.png'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/12/24RRld.png'
+      }     
+    ],
+    chooseBackImg: [
+      {
+        url: 'https://z3.ax1x.com/2021/06/13/2IHmNj.jpg'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/13/2IHeEQ.jpg'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/13/2IHVHg.jpg'
+      },
+      {
+        url: 'https://z3.ax1x.com/2021/06/13/2IHAu8.jpg'
+      },
+    ],
     snapPointsChoose: ['0%', '18%', '35%'],
-    snapPointsBack: ['0%', '35%'],
+    snapPointsBack: ['0%', '20%', '40%'],
     snapPointsText: ['0%', '20%'],
     chooseIndex: 5,
     x: 224,
@@ -391,6 +581,7 @@ class CreateIndex extends Component {
     textValue: '',
     accountImage: [],
     accountUrl: '',
+    backUrl: 'https://z3.ax1x.com/2021/06/13/2IHlvV.jpg',
   }
   handleText = (textValue) => {
     this.setState({
@@ -471,6 +662,11 @@ class CreateIndex extends Component {
     )
   }
   handleChangeBack = (item) => {
+    if(this.state.backUrl) {
+      this.setState({
+        backUrl: '',
+      })
+    }
     this.setState({
       x: item.x,
       y: item.y,
@@ -493,20 +689,11 @@ class CreateIndex extends Component {
   handleBack = () => {
     this.back.snapTo(1);
   }
-  handleChoose = () => {
-    this.bottom.snapTo(2);
+  handleChooseBack = () => {
+    this.chooseBack.snapTo(1);
   }
-  handleClose = () => {
-    this.bottom.close();
-  }
-  handlechooseData = () => {
-    const { chooseIndex, chooseData } = this.state;
-    if(chooseIndex === 4) {
-      return chooseData
-    }
-    if(chooseIndex === 5) {
-      return chooseData
-    }
+  handleChooseDeep = () => {
+    this.chooseDeep.snapTo(1);
   }
   handleReturnBack = () => {
     this.context.goBack();
@@ -538,8 +725,7 @@ class CreateIndex extends Component {
     }
     let promise = CameraRoll.save(this.state.accountUrl);
     promise.then(function (result) {
-      // alert('保存成功！地址如下：\n' + result);
-      Toast.success('Toast success');
+      alert('保存成功！地址如下：\n' + result);
     }).catch(function (error) {
       alert('保存失败！\n' + error);
     });
@@ -547,14 +733,14 @@ class CreateIndex extends Component {
   }
   renderItem = ({item}) => {
     return (
-      <TouchableOpacity style={styles.itemContainer} key={item.id} activeOpacity={0.9} onPress={item.onPress}>
-        <View>
+      <View style={styles.itemContainer}>
+        <TouchableOpacity style={styles.itemContainer} key={item.id} activeOpacity={0.9} onPress={item.onPress}>
           <Image
             source={{uri: item.url}}
             style={styles.imageContainer}
           ></Image>
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </View>
     )
   }
   renderImage = () => {
@@ -693,11 +879,50 @@ class CreateIndex extends Component {
       ></Header>
     )
   }
+  renderBack = () => {
+    const { chooseBackImg } = this.state;
+    return (
+      <View style={{
+        flexDirection: 'row',
+        padding: 10,
+        flexWrap: 'wrap',
+        justifyContent: 'space-between'
+      }}>
+        {
+          chooseBackImg.map((item, index) => {
+            return (
+              <TouchableOpacity 
+                style={{
+                  width: 73,
+                  height: 130,
+                  borderRadius: 10,
+                  overflow: 'hidden',
+                }} 
+                key={index} 
+                activeOpacity={0.9}
+                onPress={() => this.setState({backUrl: item.url})}
+              >
+                <View>
+                  <Image
+                    source={{uri: item.url}}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                    }}
+                  ></Image>
+                </View>
+              </TouchableOpacity>
+            )
+          })
+        }
+      </View>
+    )
+  }
   componentDidMount = () => {
-    this.bottom.close();
+    // this.bottom.close();
   }
   render() {
-    const { operations, snapPointsChoose, snapPointsBack, snapPointsText, chooseBack, value, x, y, z, textValue, showImage, accountImage, chooseTextColor } = this.state;
+    const { operations, snapPointsChoose, snapPointsBack, snapPointsText, chooseBack, value, x, y, z, textValue, showImage, accountImage, chooseTextColor, chooseDeep, chooseData, backUrl } = this.state;
     return (
       <View style={{position: 'relative', width: '100%', height: '100%'}}>
         <Header 
@@ -720,21 +945,32 @@ class CreateIndex extends Component {
           }
         ></Header>
         <StatusBar backgroundColor="#fff" barStyle='dark-content' />
-        <View style={styles.createContainer(x, y, z , value)} ref={ref => this.account = ref}>
+        <ImageBackground
+          style={styles.createContainer(x, y, z , value)}
+          ref={ref => this.account = ref}
+          source={{uri: backUrl}}
+        >
           {
             this.renderImage()
           }
           {
             this.renderText()
           }
-        </View>
+        </ImageBackground>
         <View style={styles.operation}>
           {
             operations.map((item, index) => {
               return (
                 <TouchableOpacity activeOpacity={1} style={styles.operationItem} key={index} onPress={item.onPress}>
                   <View>
-                    <Svg width={item.icon.width} height={item.icon.height} svgXmlData={item.icon.name} />
+                    {/* <Svg width={item.icon.width} height={item.icon.height} svgXmlData={item.icon.name}/> */}
+                    <Image 
+                      source={{uri: item.icon.name}}
+                      style={{
+                        width: item.icon.width,
+                        height: item.icon.height,
+                      }}
+                    />
                     <Text style={styles.itemText}>{item.text}</Text>
                   </View>
                 </TouchableOpacity>
@@ -744,12 +980,25 @@ class CreateIndex extends Component {
         </View>
         <BottomSheet
           ref={ref => {
-            this.bottom = ref;
+            this.chooseBack = ref;
           }}
           snapPoints={snapPointsChoose}
         >
           <BottomSheetFlatList
-            data={this.handlechooseData()}
+            data={chooseData}
+            keyExtractor={i => i}
+            renderItem={this.renderItem}
+            contentContainerStyle={styles.contentContainer}
+          />
+        </BottomSheet>
+        <BottomSheet
+          ref={ref => {
+            this.chooseDeep = ref;
+          }}
+          snapPoints={snapPointsChoose}
+        >
+          <BottomSheetFlatList
+            data={chooseDeep}
             keyExtractor={i => i}
             renderItem={this.renderItem}
             contentContainerStyle={styles.contentContainer}
@@ -761,50 +1010,68 @@ class CreateIndex extends Component {
           }}
           snapPoints={snapPointsBack}
         >
-          <View style={styles.backChoose}>
-            <View style={styles.colorChoose}>
+          <ScrollableTabView
+            initialPage={0}
+            tabBarUnderlineStyle={{
+              backgroundColor: '#7C83D5'
+            }}
+            tabBarActiveTextColor='#4D5BBE'
+            tabBarInactiveTextColor="#101010"
+            tabBarTextStyle={{
+              fontSize: 15,
+              fontWeight: 'bold',
+            }}
+          >
+            <View style={styles.backChoose} tabLabel='纯色'>
+              <View style={styles.colorChoose}>
+                {
+                  chooseBack.map((item, index) => {
+                    return (
+                      <TouchableOpacity activeOpacity={0.9} key={index} style={styles.itemColor} onPress={() => this.handleChangeBack(item)}>
+                        <View style={{
+                          ...styles.backColor,
+                          backgroundColor: `rgba(${item.x}, ${item.y}, ${item.z}, 1)`,
+                        }}></View>
+                        <Text style={styles.backText}>{item.text}</Text>
+                      </TouchableOpacity>
+                    )
+                  })
+                }
+              </View>
+              <View style={styles.opacityChoose}>
+                <Slider
+                  style={{
+                    width: 300,
+                  }}
+                  value={value*100}
+                  maximumValue={100}
+                  minimumValue={0}
+                  onValueChange={(value) => this.handleChangeOpacity(value/100)}
+                  trackStyle={{ height: 5, backgroundColor: '#D3D3D3' }}
+                  thumbStyle={{ height: 17, width: 40, backgroundColor: 'transparent' }}
+                  minimumTrackTintColor={'#FFF5EE'}
+                  thumbProps={{
+                    children: (
+                      <View 
+                        style={{
+                          width: 20,
+                          height: 20,
+                          borderRadius: 50,
+                          backgroundColor: '#C0C0C0',
+                        }}
+                      />
+                    ),
+                  }}
+                />
+                <Text>透明度 {value}</Text>
+              </View>
+            </View>
+            <View tabLabel='花色'>
               {
-                chooseBack.map((item, index) => {
-                  return (
-                    <TouchableOpacity activeOpacity={0.9} key={index} style={styles.itemColor} onPress={() => this.handleChangeBack(item)}>
-                      <View style={{
-                        ...styles.backColor,
-                        backgroundColor: `rgba(${item.x}, ${item.y}, ${item.z}, 1)`,
-                      }}></View>
-                      <Text style={styles.backText}>{item.text}</Text>
-                    </TouchableOpacity>
-                  )
-                })
+                this.renderBack()
               }
             </View>
-            <View style={styles.opacityChoose}>
-              <Slider
-                style={{
-                  width: 300,
-                }}
-                value={value*100}
-                maximumValue={100}
-                minimumValue={0}
-                onValueChange={(value) => this.handleChangeOpacity(value/100)}
-                trackStyle={{ height: 5, backgroundColor: '#D3D3D3' }}
-                thumbStyle={{ height: 17, width: 40, backgroundColor: 'transparent' }}
-                minimumTrackTintColor={'#FFF5EE'}
-                thumbProps={{
-                  children: (
-                    <View 
-                      style={{
-                        width: 20,
-                        height: 20,
-                        borderRadius: 50,
-                        backgroundColor: '#C0C0C0',
-                      }}
-                    />
-                  ),
-                }}
-              />
-              <Text>透明度 {value}</Text>
-            </View>
-          </View>
+          </ScrollableTabView>
         </BottomSheet>
         <BottomSheet
           ref={ref => {

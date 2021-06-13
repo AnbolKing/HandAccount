@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Image } from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
 import Svg from 'react-native-svg-uri';
 import {
@@ -24,45 +24,91 @@ class TabBar extends Component {
       {
         selected: 'square',
         title: '广场',
-        renderIcon: () => <Svg width='30' height='30' svgXmlData={square} />,
-        renderSelectedIcon: () => <Svg width='30' height='30' svgXmlData={selectSquare} />,
+        renderIcon: () => {
+          return (
+            // <Svg width='30' height='30' svgXmlData={square} />
+            <Image 
+              source={{uri: 'https://z3.ax1x.com/2021/06/13/2IoIrF.png'}}
+              style={{
+                width: 40,
+                height: 40,
+              }}
+            />
+          )
+        },
+        renderSelectedIcon: () => {
+          return (
+            // <Svg width='30' height='30' svgXmlData={selectSquare} />
+            <Image 
+              source={{uri: 'https://z3.ax1x.com/2021/06/13/2Io7VJ.png'}}
+              style={{
+                width: 40,
+                height: 40,
+              }}
+            />
+          )
+        },
         onPress: () => this.setState({ selectedTab: 'square' }),
         component: <SquareIndex />
       },
-      // {
-      //   selected: 'circle',
-      //   title: '圈子',
-      //   renderIcon: () => <Svg width='28' height='30' svgXmlData={circle} />,
-      //   renderSelectedIcon: () => <Svg width='28' height='30' svgXmlData={selectCircle} />,
-      //   onPress: () => this.setState({ selectedTab: 'circle' }),
-      //   component: <CircleIndex />
-      // },
       {
         selected: 'create',
-        renderIcon: () => <Svg width='45' height='40' svgXmlData={create}/>,
-        renderSelectedIcon: () => <Svg width='45' height='40' svgXmlData={create}/>,
+        renderIcon: () => {
+          return (
+            // () => <Svg width='45' height='40' svgXmlData={create}/>
+            <Image 
+              source={{uri: 'https://z3.ax1x.com/2021/06/13/2Iob5R.png'}}
+              style={{
+                width: 50,
+                height: 50,
+              }}
+            />
+          )
+        },
+        renderSelectedIcon: () => {
+          return (
+            // () => <Svg width='45' height='40' svgXmlData={create}/>
+            <Image 
+              source={{uri: 'https://z3.ax1x.com/2021/06/13/2Iob5R.png'}}
+              style={{
+                width: 50,
+                height: 50,
+              }}
+            />
+          )
+        },
         onPress: () => {
           this.context.navigate('Create');
         },
-        tabStyle: {
-          alignItems: 'center',
-          // marginTop: 20,
-        },
         // component: <CreateIndex />
       },
-      // {
-      //   selected: 'message',
-      //   title: '消息',
-      //   renderIcon: () => <Svg width='25' height='30' svgXmlData={message} />,
-      //   renderSelectedIcon: () => <Svg width='25' height='30' svgXmlData={selectMessage} />,
-      //   onPress: () => this.setState({ selectedTab: 'message' }),
-      //   component: <MessageIndex />
-      // },
       {
         selected: 'my',
         title: '我的',
-        renderIcon: () => <Svg width='30' height='30' svgXmlData={my} />,
-        renderSelectedIcon: () => <Svg width='30' height='30' svgXmlData={selectMy} />,
+        renderIcon: () => {
+          return (
+            // <Svg width='30' height='30' svgXmlData={my} />
+            <Image 
+              source={{uri: 'https://z3.ax1x.com/2021/06/13/2Ioob4.png'}}
+              style={{
+                width: 40,
+                height: 40,
+              }}
+            />
+          )
+        },
+        renderSelectedIcon: () => {
+          return (
+            // <Svg width='30' height='30' svgXmlData={selectMy} />
+            <Image 
+              source={{uri: 'https://z3.ax1x.com/2021/06/13/2IoLP1.png'}}
+              style={{
+                width: 40,
+                height: 40,
+              }}
+            />
+          )
+        },
         onPress: () => this.setState({ selectedTab: 'my' }),
         component: <MyIndex />
       }
@@ -75,14 +121,6 @@ class TabBar extends Component {
         <TabNavigator
           tabBarStyle={{
             height: 60,
-            alignItems: 'center',
-            // borderRadius: 40,
-            // marginBottom: 100,
-            // borderColor: '#eee',
-            // borderWidth: 0.5,
-            // backgroundColor: '#fff',
-            // marginLeft: 10,
-            // marginRight: 10,
             paddingLeft: 10,
             paddingRight: 10,
           }}
@@ -105,8 +143,14 @@ class TabBar extends Component {
                   renderSelectedIcon={item.renderSelectedIcon}
                   onPress={item.onPress}
                   selectedTitleStyle={{color: '#c863b5'}}
-                  tabStyle={item.tabStyle}
-                  titleStyle={item.titleStyle}
+                  tabStyle={{
+                    textAlign: 'center',
+                    paddingTop: 5,
+                  }}
+                  titleStyle={{
+                    margin: 0,
+                    padding: 0,
+                  }}
                 >
                   {item.component}
                 </TabNavigator.Item>
