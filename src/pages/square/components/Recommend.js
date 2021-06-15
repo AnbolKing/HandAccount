@@ -142,7 +142,7 @@ class Recommend extends Component {
               paddingLeft: 5,
               paddingRight: 5,
             }}
-          >这是一个关于猫猫miao的手账</Text>
+          >这张图片之所以是猫是因为这是测试接口</Text>
           {/* user likes */}
           {/* <View
             style={{

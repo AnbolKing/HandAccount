@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, Text, StatusBar } from 'react-native';
+import { View, TouchableOpacity, Text, StatusBar, ImageBackground } from 'react-native';
 import Svg from 'react-native-svg-uri';
 import {
   Add,
@@ -20,19 +20,11 @@ const CustormerBar = (props) => {
         height: 50,
         alignItems: 'center',
         justifyContent: 'space-between',
-        backgroundColor: activeTab===0 ? '#fff' : '#F7F8FD',
+        backgroundColor: '#fff',
         flexDirection: 'row',
       }}
     >
-      {
-        activeTab===0 
-        ? (
-          <StatusBar backgroundColor={'#fff'} barStyle={'dark-content'} translucent={false}/>
-        )
-        : (
-          <StatusBar backgroundColor={'#F7F8FD'} barStyle={'dark-content'} translucent={false}/>
-        )
-      }
+      <StatusBar backgroundColor={'#fff'} barStyle={'dark-content'} translucent={false}/>
       <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', flex: 2}}>
       {
         tabs.map((item, index) => {
@@ -58,8 +50,9 @@ const CustormerBar = (props) => {
                   style={{
                     color: activeTab===index ? '#4D5BBE' : '#101010',
                     fontSize: 20,
-                    fontWeight: 'bold',
+                    // fontWeight: 'bold',
                     ...props.wordStyle,
+                    fontFamily: 'wenyue1',
                   }}
                 >
                   {item}

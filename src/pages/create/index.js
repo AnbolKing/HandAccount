@@ -69,6 +69,8 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: '#000',
     textAlign: 'center',
+    // fontFamily: 'kangxi'
+    fontFamily: 'wenyue1',
   },
   itemContainer: {
     margin: 6,
@@ -219,9 +221,11 @@ class CreateIndex extends Component {
       },
       {
         url: 'https://z3.ax1x.com/2021/06/12/25PQXj.png',
+        onPress: () => this.handleCheckImage('https://z3.ax1x.com/2021/06/12/25PQXj.png')
       },
       {
         url: 'https://z3.ax1x.com/2021/06/12/25P3Bn.png',
+        onPress: () => this.handleCheckImage('https://z3.ax1x.com/2021/06/12/25P3Bn.png')
       },
       {
         url: 'https://z3.ax1x.com/2021/06/12/25P87q.png',
@@ -242,19 +246,24 @@ class CreateIndex extends Component {
         url: 'https://z3.ax1x.com/2021/06/12/25Pa3F.png',
       },
       {
-        url: 'https://z3.ax1x.com/2021/06/12/25CIYT.png'
+        url: 'https://z3.ax1x.com/2021/06/12/25CIYT.png',
+        onPress: () => this.handleCheckImage('https://z3.ax1x.com/2021/06/12/25CIYT.png')
       },
       {
-        url: 'https://z3.ax1x.com/2021/06/12/25C5kV.png'
+        url: 'https://z3.ax1x.com/2021/06/12/25C5kV.png',
+        onPress: () => this.handleCheckImage('https://z3.ax1x.com/2021/06/12/25C5kV.png')
       },
       {
-        url: 'https://z3.ax1x.com/2021/06/12/25Cwwt.png'
+        url: 'https://z3.ax1x.com/2021/06/12/25Cwwt.png',
+        onPress: () => this.handleCheckImage('https://z3.ax1x.com/2021/06/12/25Cwwt.png')
       },
       {
-        url: 'https://z3.ax1x.com/2021/06/12/25C6Sg.png'
+        url: 'https://z3.ax1x.com/2021/06/12/25C6Sg.png',
+        onPress: () => this.handleCheckImage('https://z3.ax1x.com/2021/06/12/25C6Sg.png')
       },
       {
-        url: 'https://z3.ax1x.com/2021/06/12/25CrY8.png'
+        url: 'https://z3.ax1x.com/2021/06/12/25CrY8.png',
+        onPress: () => this.handleCheckImage('https://z3.ax1x.com/2021/06/12/25CrY8.png')
       },
       {
         url: 'https://z3.ax1x.com/2021/06/12/25C0TP.png'
@@ -506,16 +515,20 @@ class CreateIndex extends Component {
     ],
     chooseDeep: [
       {
-        url: 'https://z3.ax1x.com/2021/06/12/24g7Hf.png'
+        url: 'https://z3.ax1x.com/2021/06/12/24g7Hf.png',
+        onPress: () => this.handleCheckImage('https://z3.ax1x.com/2021/06/12/24g7Hf.png')
       },
       {
-        url: 'https://z3.ax1x.com/2021/06/12/242Suq.png'
+        url: 'https://z3.ax1x.com/2021/06/12/242Suq.png',
+        onPress: () => this.handleCheckImage('https://z3.ax1x.com/2021/06/12/242Suq.png')
       },
       {
-        url: 'https://z3.ax1x.com/2021/06/12/24g5jI.png'
+        url: 'https://z3.ax1x.com/2021/06/12/24g5jI.png',
+        onPress: () => this.handleCheckImage('https://z3.ax1x.com/2021/06/12/24g5jI.png')
       },
       {
-        url: 'https://z3.ax1x.com/2021/06/12/24gTDP.png'
+        url: 'https://z3.ax1x.com/2021/06/12/24gTDP.png',
+        onPress: () => this.handleCheckImage('https://z3.ax1x.com/2021/06/12/24gTDP.png')
       },
       {
         url: 'https://z3.ax1x.com/2021/06/12/24gj3j.png'
@@ -943,6 +956,9 @@ class CreateIndex extends Component {
               </View>
             </TouchableOpacity>
           }
+          headerTextStyle={{
+            fontFamily: 'wenyue1',
+          }}
         ></Header>
         <StatusBar backgroundColor="#fff" barStyle='dark-content' />
         <ImageBackground
@@ -957,7 +973,10 @@ class CreateIndex extends Component {
             this.renderText()
           }
         </ImageBackground>
-        <View style={styles.operation}>
+        <ImageBackground 
+          style={styles.operation}
+          source={{uri: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic.616pic.com%2Fbg_w1180%2F00%2F12%2F89%2FKa6aU5xpKN.jpg&refer=http%3A%2F%2Fpic.616pic.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1626181054&t=d5b7a91a27d7a410a66389d8e7fe7a48'}}
+        >
           {
             operations.map((item, index) => {
               return (
@@ -977,7 +996,7 @@ class CreateIndex extends Component {
               )
             })
           }
-        </View>
+        </ImageBackground>
         <BottomSheet
           ref={ref => {
             this.chooseBack = ref;

@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { StyleSheet, View, Image, Text } from 'react-native';
+import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
 import { ScrollTabView, ScrollView } from 'react-native-scroll-head-tab-view';
 import MyHeader from './components/myHeader';
 import HandAccount from './components/handaccount';
@@ -71,40 +71,44 @@ const MyIndex = () => {
         backgroundColor: '#F7F7F7'
       }}
     ></Image>
-    <View style={styles.top}>
-      <Image 
-        source={{uri: 'https://z3.ax1x.com/2021/06/13/2Iod8P.jpg'}}
-        style={{
-          width: 100,
-          height: 100,
-          borderRadius: 50,
-        }}
-      />
-      <View style={{
-        paddingTop: 3,
-        paddingBottom: 3,
-        paddingRight: 25,
-        paddingLeft: 25,
-        backgroundColor: 'rgba(255, 255, 255, 0.8)',
-        borderRadius: 40,
-        marginTop: 15,
-        shadowColor: "#eee",
-        shadowOffset: {
-          width: 0,
-          height: 2,
-        },
-        shadowOpacity: 0.9,
-        shadowRadius: 3.84,
-        elevation: 3,
-      }}>
-        <Text style={{
-          textAlign: 'center',
-          fontSize: 17,
-          // fontWeight: 'bold',
-          color: '#000',
-        }}>用户昵称</Text>
+    <TouchableOpacity>
+      <View style={styles.top}>
+        <Image 
+          source={{uri: 'https://z3.ax1x.com/2021/06/13/2Iod8P.jpg'}}
+          style={{
+            width: 100,
+            height: 100,
+            borderRadius: 50,
+          }}
+        />
+        <View style={{
+          paddingTop: 3,
+          paddingBottom: 3,
+          paddingRight: 25,
+          paddingLeft: 25,
+          backgroundColor: 'rgba(255, 255, 255, 0.8)',
+          borderRadius: 40,
+          marginTop: 15,
+          shadowColor: "#eee",
+          shadowOffset: {
+            width: 0,
+            height: 2,
+          },
+          shadowOpacity: 0.9,
+          shadowRadius: 3.84,
+          elevation: 3,
+        }}>
+          <Text 
+            style={{
+            textAlign: 'center',
+            fontSize: 17,
+            // fontWeight: 'bold',
+            color: '#000',
+            }}
+          >用户昵称</Text>
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
     <View style={styles.container}>
       <ScrollTabView 
         headerHeight={headerHeight} 
@@ -128,7 +132,8 @@ const MyIndex = () => {
         }}
         tabBarTextStyle={{
           fontSize: 15,
-          fontWeight: '700'
+          // fontWeight: '700',
+          fontFamily: 'wenyue1',
         }}
         tabBarStyle={{
           backgroundColor: '#fff',

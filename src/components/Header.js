@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
     color: '#000',
-    
+    // fontFamily: 'kangxi',
   },
   cellfixed: {
     height: '100%',
@@ -41,7 +41,7 @@ const Header = (props) => {
         </View>
       </TouchableOpacity>
       <View style={styles.cell}>
-        <Text style={styles.headerText}>
+        <Text style={{...styles.headerText, ...props.headerTextStyle}}>
           {props.title}
         </Text>
       </View>

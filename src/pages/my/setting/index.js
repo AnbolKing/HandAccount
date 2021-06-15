@@ -45,7 +45,7 @@ class MySetting extends Component {
   static contextType = NavigationContext;
   state = {
     isVisible: false,
-    avatar: 'https://tva2.sinaimg.cn/large/9bd9b167ly1g1p9qayg3qj20b40b43z9.jpg',
+    avatar: 'https://z3.ax1x.com/2021/06/13/2Iod8P.jpg',
     data: [
       {
         preIcon: <Svg width='26' height='26' svgXmlData={nickname} />,

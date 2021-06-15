@@ -150,6 +150,7 @@ class TabBar extends Component {
                   titleStyle={{
                     margin: 0,
                     padding: 0,
+                    fontFamily: 'kangxi'
                   }}
                 >
                   {item.component}
